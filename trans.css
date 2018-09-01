@@ -19,8 +19,6 @@
 }
 
 .google_trans_20140526 .animated {
-        -webkit-transition: height 0.2s;
-        -moz-transition: height 0.2s;
         transition: height 0.2s;
 }
 .google_trans_20140526 .panel {
@@ -31,15 +29,15 @@
     cursor: pointer;
 }
 
-.google_trans_20140526 .panel .togglable .glyphicon.glyphicon-resize-full {
+.google_trans_20140526 .panel .togglable .glyphicon.glyphicon-chevron-up {
     display: none;
 }
 
-.google_trans_20140526 .panel .togglable.heading_hidden .glyphicon.glyphicon-resize-small {
+.google_trans_20140526 .panel .togglable.heading_hidden .glyphicon.glyphicon-chevron-down {
     display: none;
 }
 
-.google_trans_20140526 .panel .togglable.heading_hidden .glyphicon.glyphicon-resize-full {
+.google_trans_20140526 .panel .togglable.heading_hidden .glyphicon.glyphicon-chevron-up {
     display: inline;
 }
 
@@ -61,13 +59,13 @@
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 5px;
-    
+
 }
 
 
 .google_trans_20140526 .panel.test-div div.panel-heading .heading-text {
     max-width: calc(100% - 20px);
-    
+
     white-space: nowrap;
     overflow: hidden;
 }
