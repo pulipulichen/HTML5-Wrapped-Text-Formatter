@@ -1,0 +1,73 @@
+/**
+ * Bootstrap 樣板
+ * http://getbootstrap.com/components/#panels
+ */
+.google_trans_20140526 .panel.input-div {
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.google_trans_20140526 textarea {
+    border:2px solid #ccc;
+    padding: 10px;
+    vertical-align: top;
+    width: 25%;
+}
+
+.google_trans_20140526 .animated {
+        -webkit-transition: height 0.2s;
+        -moz-transition: height 0.2s;
+        transition: height 0.2s;
+}
+.google_trans_20140526 .panel {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+.google_trans_20140526 .panel .togglable {
+    cursor: pointer;
+}
+
+.google_trans_20140526 .panel .togglable .glyphicon.glyphicon-resize-full {
+    display: none;
+}
+
+.google_trans_20140526 .panel .togglable.heading_hidden .glyphicon.glyphicon-resize-small {
+    display: none;
+}
+
+.google_trans_20140526 .panel .togglable.heading_hidden .glyphicon.glyphicon-resize-full {
+    display: inline;
+}
+
+.google_trans_20140526 .panel .iframe {
+    width: 100%;
+}
+.google_trans_20140526 .panel.test-output {
+    display: none;
+}
+
+.google_trans_20140526 .test-div.panel textarea {
+    width: 100%;
+    height: auto;
+    padding: 0;
+}
+
+.google_trans_20140526 .panel.test-div div.panel-heading {
+    line-height: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    
+}
+
+
+.google_trans_20140526 .panel.test-div div.panel-heading .heading-text {
+    max-width: calc(100% - 20px);
+    
+    white-space: nowrap;
+    overflow: hidden;
+}

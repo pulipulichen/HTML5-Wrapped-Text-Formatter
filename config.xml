@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget id="idv.pulipuli.pdfreformat" version="0.0.1">
+     <name>PDF Reformat</name>
+     <description>
+         把PDF複製過來的文字重整一下。
+     </description>
+     <author email="pulipuli.chen@gmail.com" href="http://pulipuli.blogspot.tw">
+         布丁布丁吃布丁
+     </author>
+     <content src="index.html" />
+     <access origin="*" />
+ </widget>

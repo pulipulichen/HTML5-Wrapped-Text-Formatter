@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!-- <html> -->
+<html manifest="trans.manifest">
+    <head>
+        <title>HTML Wrapped Text Formatter</title>
+        <meta charset="UTF-8">
+		    <link rel="icon" href="icon.ico" type="image/x-icon" />
+        <script src='jquery.min.js'></script>
+ <script src="jquery-lang.js" charset="utf-8" type="text/javascript"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+
+<link rel="stylesheet" href="trans.css" />
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+
+<!-- Latest compiled and minified JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src='jquery.autosize.min.js'></script>
+
+<script type="text/javascript" src="trans.js"></script>
+
+    </head>
+
+
+    <body>
+
+<!-- ----------------------------------------
+  -- HTML
+  -- ----------------------------------------
+  -->
+<div id="google_trans_20140526" class="google_trans_20140526">
+    <div class="output-container">
+<div class="page-header google-trans-title">
+    <h4 style="text-align:center">HTML Wrapped Text Formatter</h4>
+</div>
+<div class="test-output">
+</div>
+    </div>
+
+
+<div class="panel panel-primary input-div">
+    <!--
+    Bootstrap 樣板
+    http://getbootstrap.com/components/#panels
+    -->
+    <div class="panel-heading togglable" onclick="_googleTransUtils.toggle_panel(this);">
+        <span class="glyphicon glyphicon-resize-full" style="float:right"></span>
+        <span class="glyphicon glyphicon-resize-small" style="float:right"></span>
+        <span class="glyphicon glyphicon-edit"></span>
+        <span class="panel-title">要翻譯的文字</span>
+    </div>
+        <div class="panel-body">
+            <form onsubmit="return _submitToGoogleTrans(this);" method="post">
+                <!--
+                <label>
+                    標題: <input type="text" name="subject" />
+                </label>
+                -->
+
+        <div>
+            <textarea name="source" class="animated source input-textarea" style="width: 100%;" placeholder="請輸入要翻譯的文字..."></textarea>
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon">
+                來源語系：
+                <select name="source_lang">
+                    <option value="en">English</option>
+                </select>
+            </label>
+
+            <label class="input-group-addon">
+                翻譯語系：
+                <select name="target_lang">
+                    <option value="zh-TW">正體中文</option>
+                </select>
+            </label>
+        </div>
+        <div class="input-group">
+            <label class="input-group-addon">
+                <input type="checkbox" name="replace_fulltype" value="true" checked="checked"/> 替換全型
+            </label>
+            <label class="input-group-addon">
+                <input type="checkbox" name="trim_dash" value="true" checked="checked"/> 接合破折號「-」
+            </label class="input-group-addon">
+            <label class="input-group-addon">
+                <input type="checkbox" name="trim_nl" value="true" checked="checked"/> 接合換行
+            </label>
+
+            <label class="input-group-addon">
+                <input type="checkbox" name="sentence_nl" value="true" checked="checked"/> 換句加大隔行
+            </label>
+            <label class="input-group-addon">
+                <input type="checkbox" name="trim_citation" value="true" checked="checked"/> 刪除引言
+            </label>
+
+
+
+            <label class="input-group-addon">
+                <input type="checkbox" name="test_output" value="true" checked="checked" /> 文字重整
+            </label>
+        </div>
+        <div style="text-align:center;margin-top: 0.5em;">
+            <button type="submit" class="btn btn-lg btn-default" style="width: 100%">
+                遞交 (Ctrl + Enter)
+            </button>
+        </div>
+        <div style="text-align:center;display:none;">
+            <!--
+            <label>
+                <input type="radio" name="output_style" value="iframe" checked="true" /> 結果輸出在下方
+            </label>
+            -->
+            <label>
+                <input type="radio" name="output_style" value="blank" checked="checked" /> 結果輸出在開新視窗
+            </label>
+        </div>
+            </form>
+        </div>
+</div>
+
+
+
+    </div>
+    </body>
+</html>
