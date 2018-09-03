@@ -6,7 +6,8 @@ let submitToGoogleTrans = function (_form) {
   try {
     // var _source = $("#source").val();
     var _source = _form.source.value
-    _source = $.trim(_source)
+    // console.log(_source)
+    _source = _source.trim()
 
     if (_source === '') {
       return false
@@ -15,43 +16,45 @@ let submitToGoogleTrans = function (_form) {
     // 正規表示法
     // http://programmermagazine.github.io/201307/htm/article2.html
 
-    _source = _googleTransUtils.str_replace('\t', ' ', _source)
-    while (_source.indexOf('  ') > -1) {
-      _source = _googleTransUtils.str_replace('  ', ' ', _source)
+    do {
+      _source = _source.split('\t').join(' ')
     }
+    while (_source.indexOf('  ') > -1)
 
     if (_form.replace_fulltype.checked) {
-      _source = _googleTransUtils.str_replace('’', "'", _source)
-      _source = _googleTransUtils.str_replace('”', '"', _source)
-      _source = _googleTransUtils.str_replace('“', '"', _source)
+      _source = _source.split('’').join("'")
+      _source = _source.split('”').join('""')
+      _source = _source.split('“').join('""')
     }
 
     if (_form.trim_dash.checked) {
       while (_source.indexOf(' \n') > -1) {
-        _source = _googleTransUtils.str_replace(' \n', '\n', _source)
+        // _source = _googleTransUtils.str_replace(' \n', '\n', _source)
+        _source = _source.split(' \n').join('\n')
       }
-      _source = _googleTransUtils.str_replace('-\n', '', _source)
+      // _source = _googleTransUtils.str_replace('-\n', '', _source)
+      _source = _source.split('-\n').join('')
     }
 
     if (_form.trim_nl.checked) {
       // 解決中文換行問題
       _source = _source.replace(/\n[\u4e00-\u9fa5]/g, function (_word) {
         // alert(_word);
-        return _googleTransUtils.str_replace('\n', '', _word)
+        return _word.split('\n').join('')
       })
 
-      _source = _googleTransUtils.str_replace('\n', ' ', _source)
+      _source = _source.split('\n').join(' ')
     }
 
     if (_form.sentence_nl.checked) {
-      _source = _googleTransUtils.str_replace('. ', '. \n\n', _source)
-      _source = _googleTransUtils.str_replace('• ', '\n\n• ', _source)
+      _source = _source.split('. ').join('. \n\n')
+      _source = _source.split('• ').join('\n\n• ')
       _source = _source.replace(/p\. \n\n\d/g, function (_word) {
-      // alert(_word);
-        return _googleTransUtils.str_replace('\n', '', _word)
+        // alert(_word);
+        return _word.split('\n').join('')
       })
       var stripNl = function (_word) {
-        return _googleTransUtils.str_replace('\n', '', _word)
+        return _word.split('\n').join('')
       }
 
       // _source = _googleTransUtils.str_replace("e.g. \n\n", "e.g. ", _source); //舉例
@@ -65,18 +68,18 @@ let submitToGoogleTrans = function (_form) {
       // _source = _googleTransUtils.str_replace("etc. \n\n", "etc. ", _source); //等
       _source = _source.replace(/etc\. \n\n[^A-Z]/g, stripNl)
 
-      _source = _googleTransUtils.str_replace('。', '。 \n\n', _source)
-      _source = _googleTransUtils.str_replace('." ', '." \n\n', _source)
-      _source = _googleTransUtils.str_replace('." \n\n(', '." (', _source) // 等
-      _source = _googleTransUtils.str_replace('。」 ', '。」 \n\n', _source)
-      _source = _googleTransUtils.str_replace(".' ", ".' \n\n", _source)
+      _source = _source.split('。').join('。 \n\n')
+      _source = _source.split('." ').join('." \n\n')
+      _source = _source.split('." \n\n(').join('." (')
+      _source = _source.split('。」 ').join('。」 \n\n')
+      _source = _source.split(".' ").join(".' \n\n")
       // _source = _googleTransUtils.str_replace(": ", ": \n\n\n", _source);
-      _source = _googleTransUtils.str_replace('; ', '; \n\n', _source)
+      _source = _source.split('; ').join('; \n\n')
       _source = _source.replace(/\d; \n\n/g, function (_word) {
         // alert(_word);
-        return _googleTransUtils.str_replace('\n', '', _word)
+        return _word.split('\n').join('')
       })
-      _source = _googleTransUtils.str_replace('； ', '； \n\n', _source)
+      _source = _source.split('； ').join('； \n\n')
       _source = _googleTransUtils.str_replace('；', '；\n\n', _source)
 
       _source = _googleTransUtils.str_replace('（ ', ' (', _source)
@@ -87,10 +90,10 @@ let submitToGoogleTrans = function (_form) {
       // for (var _i = 1; _i < 10; _i++) {
       //    _source = _googleTransUtils.str_replace(" (" + _i + ")", " \n\n(" + _i + ")", _source);
       // }
-      _source = _googleTransUtils.str_replace('\n ', '\n', _source)
+      _source = _source.split('\n ').join('\n')
 
       _source = _source.replace(/[0-9]+\. \n\n[A-Z]/g, function (_word) {
-        return '\n\n' + _googleTransUtils.str_replace('\n', '', _word)
+        return '\n\n' + _word.split('\n').join('')
       })
     }
 
@@ -100,25 +103,25 @@ let submitToGoogleTrans = function (_form) {
     }
 
     while (_source.indexOf('  ') > -1) {
-      _source = _googleTransUtils.str_replace('  ', ' ', _source)
+      _source = _source.split('  ').join(' ')
     }
 
     while (_source.indexOf('\n ') > -1) {
-      _source = _googleTransUtils.str_replace('\n ', '\n', _source)
+      _source = _source.split('\n ').join('\n')
     }
 
     while (_source.indexOf('. \n\n.') > -1) {
-      _source = _googleTransUtils.str_replace('. \n\n.', '..', _source)
+      _source = _source.split('. \n\n.').join('..')
     }
 
     while (_source.indexOf('\n\n\n\n') > -1) {
-      _source = _googleTransUtils.str_replace('\n\n\n\n', '\n\n', _source)
+      _source = _source.split('\n\n\n\n').join('\n\n')
     }
 
     // 替換名字縮寫的問題 例如Pudding C. 不換行
     _source = _source.replace(/[A-Z]\. \n\n/g, function (_word) {
       // alert(_word);
-      return _googleTransUtils.str_replace('\n', '', _word)
+      return _word.split('\n').join('')
     })
 
     _source = $.trim(_source)
@@ -185,24 +188,27 @@ let submitToGoogleTrans = function (_form) {
 
       // -----------
 
-      $("<button type='button'></button>")
+      let _btn = $("<button type='button'></button>")
         .html('翻譯')
         .attr('pulipuli_base_url', baseUrl)
-        .click(() => {
+        .click(function () {
           var baseUrl = $(this).attr('pulipuli_base_url')
           var _url = baseUrl + $(this).next().val()
           // alert(_url);
-          window.open(_url, '_blank')
+          // window.open(_url, '_blank')
+          window.open(_url, '_blank', 'height=600,width=800,scrollbars=no')
         })
         // .css("float", "left")
         .appendTo(testDiv)
 
       var _textarea = $("<textarea class='animated source panel-body'></textarea>")
         .val(oriSource)
-        .css('width', 'calc(100% - 50px)')
-        .click(() => {
-          this.select()
-        })
+        // .css('width', 'calc(50% - 25px)')
+        .click(function () { this.select() })
+        .appendTo(testDiv)
+
+      var _textareaNode = $("<textarea class='animated source panel-body note'></textarea>")
+        // .css('width', 'calc(50% - 25px)')
         .appendTo(testDiv)
 
       var hideInputDiv = function () {
@@ -211,11 +217,17 @@ let submitToGoogleTrans = function (_form) {
 
       $(function () {
         _textarea.autosize()
+        _textareaNode.autosize()
         _textarea.focus()
         _textarea.click()
         _textarea.click(hideInputDiv)
         $('.google-trans-title').hide()
       })
+
+      if (_form.window_open_output.checked) {
+        // console.log('okok')
+        setTimeout(() => _btn.click(), 500)
+      }
     } else {
       // _source = encodeURIComponent(_source);
       if (outputStyle === 'blank') {
@@ -248,7 +260,7 @@ let submitToGoogleTrans = function (_form) {
 } // var _submitToGoogleTrans = function (_form) {
 
 $(() => {
-  $('#submitToGoogleTransForm').submit(() => {
+  $('#submitToGoogleTransForm').submit(function () {
     return submitToGoogleTrans(this)
   })
 })
@@ -263,6 +275,8 @@ var _googleTransUtils = {
    * @returns {String}
    */
   str_replace: function (_search, _replace, _subject, _count) {
+    return _subject.split(_search).join(_replace)
+
     // http://kevin.vanzonneveld.net
     // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
     // +   improved by: Gabriel Paderni
@@ -391,7 +405,7 @@ $(function () {
   })
 
   inputTextarea.keydown(function (_e) {
-    console.log(_e)
+    // console.log(_e)
     if (_e.ctrlKey && _e.keyCode === 13) {
       // Ctrl-Enter pressed
       $('.google_trans_20140526 form').submit()
