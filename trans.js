@@ -1,10 +1,11 @@
-/**
- * Bootstrap 樣板
- * http://getbootstrap.com/components/#panels
- */
+/* minifyOnSave */
 let submitToGoogleTrans = function (_form) {
   try {
     // var _source = $("#source").val();
+    /**
+     * [_source 表單輸入的文字]
+     * @type {String}
+     */
     var _source = _form.source.value
     // console.log(_source)
     _source = _source.trim()

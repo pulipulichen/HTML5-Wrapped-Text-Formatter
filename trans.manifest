@@ -2,13 +2,13 @@
 CACHE MANIFEST
 index.html
 jquery.autosize.min.js
-trans.js
+trans.min.js
 jquery.min.js
 css/bootstrap.min.css
 css/bootstrap-theme.min.css
 js/bootstrap.min.js
-jquery-lang.js
-trans.css
+jquery-lang.min.js
+trans.min.css
 fonts/glyphicons-halflings-regular.woff
 fonts/glyphicons-halflings-regular.ttf
 #
