@@ -209,6 +209,7 @@ let submitToGoogleTrans = function (_form) {
 
       var _textareaNode = $("<textarea class='animated source panel-body note'></textarea>")
         // .css('width', 'calc(50% - 25px)')
+        .click(function () { this.select() })
         .appendTo(testDiv)
 
       var hideInputDiv = function () {
@@ -260,8 +261,12 @@ let submitToGoogleTrans = function (_form) {
 } // var _submitToGoogleTrans = function (_form) {
 
 $(() => {
-  $('#submitToGoogleTransForm').submit(function () {
-    return submitToGoogleTrans(this)
+  $('#submitToGoogleTransForm').submit(function (_event) {
+    return submitToGoogleTrans(this, _event)
+  })
+  $('#submitToGoogleTransForm :submit').click(function () {
+    $('#submitToGoogleTransForm').attr('submit_type', this.name)
+    console.log(this.name)
   })
 })
 
@@ -408,22 +413,41 @@ $(function () {
     // console.log(_e)
     if (_e.ctrlKey && _e.keyCode === 13) {
       // Ctrl-Enter pressed
-      $('.google_trans_20140526 form').submit()
+      // console.log($('.google_trans_20140526 form .submit_trans').length)
+      $('.google_trans_20140526 form .submit_trans').click()
+      // console.log('aaa')
+    } else if (_e.altKey && _e.keyCode === 13) {
+      // Ctrl-Enter pressed
+      // console.log($('.google_trans_20140526 form .submit_trans').length)
+      $('.google_trans_20140526 form .submit_authors').click()
+      // console.log('aaa')
     }
   })
+
+  // ---------------------------------------
+
+  let _blurTimer
 
   $(window).blur(function () {
-    // return;
-    var _heading = $('.input-div .panel-heading.togglable')
-    _googleTransUtils.toggle_panel(_heading, false)
+    _blurTimer = setTimeout(() => {
+      // return;
+      var _heading = $('.input-div .panel-heading.togglable')
+      _googleTransUtils.toggle_panel(_heading, false)
 
-    var _source = $('.input-div [name="source"]')
-    var sourceValue = _source.val()
-    // alert([sourceValue, sourceValue.substr(sourceValue.length - 1, 1) !== "\n"]);
-    if (sourceValue !== '' && sourceValue.substr(sourceValue.length - 1, 1) !== '\n') {
-      _source.val(sourceValue + '\n')
-    }
+      var _source = $('.input-div [name="source"]')
+      var sourceValue = _source.val()
+      // alert([sourceValue, sourceValue.substr(sourceValue.length - 1, 1) !== "\n"]);
+      if (sourceValue !== '' && sourceValue.substr(sourceValue.length - 1, 1) !== '\n') {
+        _source.val(sourceValue + '\n')
+      }
+    }, 3000)
   })
+
+  $(window).focus(() => {
+    clearTimeout(_blurTimer)
+  })
+
+  // ---------------------------------------
 
   var hideInputDiv = function () {
     var _heading = $('.input-div .panel-heading.togglable')
