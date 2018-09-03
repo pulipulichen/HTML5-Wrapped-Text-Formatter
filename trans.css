@@ -58,6 +58,14 @@
   margin-left: 6px;
 }
 
+.google_trans_20140526 .test-div.panel.submit_authors button,
+.google_trans_20140526 .test-div.panel.submit_authors textarea:last-of-type {
+  display: none !important;
+}
+.google_trans_20140526 .test-div.panel.submit_authors textarea {
+  width: calc(100%)
+}
+
 .google_trans_20140526 .panel.test-div div.panel-heading {
   line-height: 100%;
   padding-top: 5px;

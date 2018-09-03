@@ -144,14 +144,13 @@ let submitToGoogleTrans = function (_form) {
 
     // https://translate.google.com.tw/#en/zh-TW/While
 
-    var oriSource = _source
-
     if ($(_form).attr('submit_type') === 'submit_authors') {
       // 接下來做作者部分的重整
       // console.log(_source)
       // console.log(_source.indexOf(' ('))
       _source = _source.substr(0, _source.indexOf(' (')).trim()
       let _authors = _source.split(',')
+      let _outputAuthors = []
       console.log(_authors)
 
       let _skipInterval = 2
@@ -172,11 +171,12 @@ let submitToGoogleTrans = function (_form) {
           _author = _firstName + ' ' + _lastName
         }
 
-        _authors[_i] = _author
+        _outputAuthors.push(_author)
       }
-      _source = _authors.join('\n')
+      _source = _outputAuthors.join('\n')
     }
 
+    var oriSource = _source
     _source = encodeURIComponent(_source)
 
     var baseUrl = 'https://translate.google.com.tw/#' +
@@ -245,6 +245,10 @@ let submitToGoogleTrans = function (_form) {
         .click(function () { this.select() })
         .appendTo(testDiv)
 
+      if ($(_form).attr('submit_type') === 'submit_authors') {
+        testDiv.addClass('submit_authors')
+      }
+
       var hideInputDiv = function () {
         $('.input-div .panel-body').slideUp()
       }
@@ -299,7 +303,7 @@ $(() => {
   })
   $('#submitToGoogleTransForm :submit').click(function () {
     $('#submitToGoogleTransForm').attr('submit_type', this.name)
-    //console.log(this.name)
+    // console.log(this.name)
   })
 })
 
@@ -337,6 +341,7 @@ var _googleTransUtils = {
     // *     example 2: str_replace(['{name}', 'l'], ['hello', 'm'], '{name}, lars');
     // *     returns 2: 'hemmo, mars'
 
+    /*
     let _i = 0
     let _j = 0
     let _temp = ''
@@ -367,6 +372,7 @@ var _googleTransUtils = {
       }
     }
     return _sa ? _s : _s[0]
+    */
   },
   trim_nl: function (_str) {
     return this.str_replace('\n', '', _str)
@@ -376,7 +382,7 @@ var _googleTransUtils = {
   },
   toggle_panel: function (_heading, isClose) {
     _heading = $(_heading)
-    var _body = _heading.next()
+    var _body = _heading.nextAll()
 
     var hiddenClassname = 'heading_hidden'
 
