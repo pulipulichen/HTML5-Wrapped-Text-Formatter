@@ -1,39 +1,33 @@
 <!DOCTYPE html>
 <!-- <html> -->
 <html manifest="trans.manifest">
-    <head>
-        <title>HTML Wrapped Text Formatter</title>
-        <meta charset="UTF-8">
-		    <link rel="icon" href="icon.ico" type="image/x-icon" />
-        <script src='jquery.min.js'></script>
- <script src="jquery-glang.js" charset="utf-8" type="text/javascript"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="css/bootstrap.min.css" />
+  <head>
+    <title>HTML Wrapped Text Formatter</title>
+    <meta charset="UTF-8">
+    <link rel="icon" href="icon.ico" type="image/x-icon" />
+    <script src='jquery.min.js'></script>
+    <script src="jquery-lang.min.js" charset="utf-8" type="text/javascript"></script>
 
-<link rel="stylesheet" href="trans.css" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="trans.css" />
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css" />
 
-<!-- Latest compiled and minified JavaScript -->
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src='jquery.autosize.min.js'></script>
+    <script type="text/javascript" src="trans.js"></script>
 
-<script type="text/javascript" src='jquery.autosize.min.js'></script>
-
-<script type="text/javascript" src="trans.js"></script>
-
-    </head>
+  </head>
 
 
-    <body>
+  <body>
 
-<!-- ----------------------------------------
-  -- HTML
-  -- ----------------------------------------
-  -->
 <div id="google_trans_20140526" class="google_trans_20140526">
-    <div class="output-container">
-<div class="page-header google-trans-title">
+  <div class="output-container">
+    <div class="page-header google-trans-title">
     <h1 style="text-align:center">
       HTML Wrapped Text Formatter
     </h1>
@@ -44,7 +38,7 @@
 
 
 <div class="panel panel-primary input-div">
-    <!-- 我才不要這樣
+    <!--
     Bootstrap 樣板
     http://getbootstrap.com/components/#panelsg
     -->
@@ -56,7 +50,7 @@
     </div>
         <div class="panel-body">
             <form id="submitToGoogleTransForm" method="post">
-                <!--aaa
+                <!--
                 <label>
                     標題: <input type="text" name="subject" />
                 </label> #FIXME: 這裡需要修改
@@ -123,9 +117,6 @@
             </form>
         </div>
 </div>
-
-
-
     </div>
-    </body>
+  </body>
 </html>
