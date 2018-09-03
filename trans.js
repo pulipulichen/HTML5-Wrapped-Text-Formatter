@@ -145,7 +145,40 @@ let submitToGoogleTrans = function (_form) {
     // https://translate.google.com.tw/#en/zh-TW/While
 
     var oriSource = _source
+
+    if ($(_form).attr('submit_type') === 'submit_authors') {
+      // 接下來做作者部分的重整
+      // console.log(_source)
+      // console.log(_source.indexOf(' ('))
+      _source = _source.substr(0, _source.indexOf(' (')).trim()
+      let _authors = _source.split(',')
+      console.log(_authors)
+
+      let _skipInterval = 2
+      if (_authors.length % 2 === 1) {
+        _skipInterval = 1
+      }
+      for (let _i = 0, _len = _authors.length; _i < _len; _i = _i + _skipInterval) {
+        let _author = _authors[_i]
+        if (_skipInterval === 2) {
+          _author = _author + ', ' + _authors[(_i + 1)]
+        }
+        console.log(_author)
+        _author = _author.split('&').join('')
+        let _nameSeperator = _author.indexOf(', ')
+        if (_nameSeperator > -1) {
+          let _lastName = _author.substr(0, _nameSeperator).trim()
+          let _firstName = _author.slice(_nameSeperator + 1, _author.length).trim()
+          _author = _firstName + ' ' + _lastName
+        }
+
+        _authors[_i] = _author
+      }
+      _source = _authors.join('\n')
+    }
+
     _source = encodeURIComponent(_source)
+
     var baseUrl = 'https://translate.google.com.tw/#' +
       _form.source_lang.value +
       '/' +
@@ -266,7 +299,7 @@ $(() => {
   })
   $('#submitToGoogleTransForm :submit').click(function () {
     $('#submitToGoogleTransForm').attr('submit_type', this.name)
-    console.log(this.name)
+    //console.log(this.name)
   })
 })
 
@@ -415,12 +448,10 @@ $(function () {
       // Ctrl-Enter pressed
       // console.log($('.google_trans_20140526 form .submit_trans').length)
       $('.google_trans_20140526 form .submit_trans').click()
-      // console.log('aaa')
     } else if (_e.altKey && _e.keyCode === 13) {
       // Ctrl-Enter pressed
       // console.log($('.google_trans_20140526 form .submit_trans').length)
       $('.google_trans_20140526 form .submit_authors').click()
-      // console.log('aaa')
     }
   })
 
