@@ -150,6 +150,7 @@ let submitToGoogleTrans = function (_form) {
       // console.log(_source)
       // console.log(_source.indexOf(' ('))
       _source = _source.substr(0, _source.indexOf(' (')).trim()
+      _source = _source.split(' and ').join(', ')
       let _authors = _source.split(',')
       let _outputAuthors = []
       console.log(_authors)
@@ -158,12 +159,13 @@ let submitToGoogleTrans = function (_form) {
       if (_authors.length % 2 === 1) {
         _skipInterval = 1
       }
+
       for (let _i = 0, _len = _authors.length; _i < _len; _i = _i + _skipInterval) {
         let _author = _authors[_i]
         if (_skipInterval === 2) {
           _author = _author + ', ' + _authors[(_i + 1)]
         }
-        console.log(_author)
+        // console.log(_author)
         _author = _author.split('&').join('')
         let _nameSeperator = _author.indexOf(', ')
         if (_nameSeperator > -1) {
