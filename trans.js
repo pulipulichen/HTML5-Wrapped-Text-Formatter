@@ -169,7 +169,8 @@ let submitToGoogleTrans = function (_form) {
         if (_nameSeperator > -1) {
           let _lastName = _author.substr(0, _nameSeperator).trim()
           let _firstName = _author.slice(_nameSeperator + 1, _author.length).trim()
-          _author = _firstName + ' ' + _lastName
+          // _author = _firstName + ' ' + _lastName
+          _author = _lastName + '\t' + _firstName
         }
 
         _outputAuthors.push(_author)
