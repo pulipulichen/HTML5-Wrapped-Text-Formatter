@@ -31,27 +31,28 @@
 }
 
 .google_trans_20140526 .panel .togglable.heading_hidden .glyphicon.glyphicon-chevron-down {
-    display: none;
+  display: none;
 }
 
 .google_trans_20140526 .panel .togglable.heading_hidden .glyphicon.glyphicon-chevron-up {
-    display: inline;
+  display: inline;
 }
 
 .google_trans_20140526 .panel .iframe {
-    width: 100%;
+  width: 100%;
 }
 .google_trans_20140526 .panel.test-output {
-    display: none;
+  display: none;
 }
 
 .google_trans_20140526 .test-div.panel textarea {
-    width: calc(50% - 25px);
-    height: auto;
-    padding: 0;
+  width: calc(55% - 25px);
+  height: auto;
+  padding: 0;
 }
 
 .google_trans_20140526 .test-div.panel textarea:last-of-type {
+  width: calc(45% - 25px);
   margin-left: 6px;
 }
 

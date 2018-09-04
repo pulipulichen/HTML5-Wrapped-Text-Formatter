@@ -177,6 +177,11 @@ let submitToGoogleTrans = function (_form) {
       _source = _outputAuthors.join('\n')
     }
 
+    // 移除括號內的資料
+    _source = _source.replace(/\[.*?\]/g, '')
+    _source = _source.replace(/\(.*?\)/g, '')
+    _source = _source.replace(/\{.*?\}/g, '')
+
     var oriSource = _source
     _source = encodeURIComponent(_source)
 
