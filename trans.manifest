@@ -1,14 +1,13 @@
 CACHE MANIFEST
 
-# 20180904 中文字
+# 20180904
 index.html
 jquery.autosize.min.js
 trans.min.js
+trans.min.css
 jquery.min.js
 css/bootstrap.min.css
 css/bootstrap-theme.min.css
 js/bootstrap.min.js
-jquery-lang.min.js
-trans.min.css
 fonts/glyphicons-halflings-regular.woff
 fonts/glyphicons-halflings-regular.ttf
