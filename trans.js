@@ -17,16 +17,29 @@ let submitToGoogleTrans = function (_form) {
     // 正規表示法
     // http://programmermagazine.github.io/201307/htm/article2.html
 
+    // console.log('1')
+
+    do {
+      _source = _source.split('  ').join(' ')
+    }
+    while (_source.indexOf('  ') > -1)
+
+    // console.log('2')
+
     do {
       _source = _source.split('\t').join(' ')
     }
-    while (_source.indexOf('  ') > -1)
+    while (_source.indexOf('\t') > -1)
+
+    // console.log('3')
 
     if (_form.replace_fulltype.checked) {
       _source = _source.split('’').join("'")
       _source = _source.split('”').join('""')
       _source = _source.split('“').join('""')
     }
+
+    // console.log('4')
 
     if (_form.trim_dash.checked) {
       while (_source.indexOf(' \n') > -1) {
@@ -37,6 +50,8 @@ let submitToGoogleTrans = function (_form) {
       _source = _source.split('-\n').join('')
     }
 
+    // console.log('5')
+
     if (_form.trim_nl.checked) {
       // 解決中文換行問題
       _source = _source.replace(/\n[\u4e00-\u9fa5]/g, function (_word) {
@@ -46,6 +61,8 @@ let submitToGoogleTrans = function (_form) {
 
       _source = _source.split('\n').join(' ')
     }
+
+    // console.log('6')
 
     if (_form.sentence_nl.checked) {
       _source = _source.split('. ').join('. \n\n')
@@ -98,22 +115,32 @@ let submitToGoogleTrans = function (_form) {
       })
     }
 
+    // console.log('7')
+
     if (_form.trim_citation.checked) {
       _source = _source.replace(/\n\d+$/g, '')
       _source = _source.replace(/\n\d+ /g, '\n')
     }
 
+    // console.log('8')
+
     while (_source.indexOf('  ') > -1) {
       _source = _source.split('  ').join(' ')
     }
+
+    // console.log('9')
 
     while (_source.indexOf('\n ') > -1) {
       _source = _source.split('\n ').join('\n')
     }
 
+    // console.log('10')
+
     while (_source.indexOf('. \n\n.') > -1) {
       _source = _source.split('. \n\n.').join('..')
     }
+
+    // console.log('11')
 
     while (_source.indexOf('\n\n\n\n') > -1) {
       _source = _source.split('\n\n\n\n').join('\n\n')
@@ -124,6 +151,8 @@ let submitToGoogleTrans = function (_form) {
       // alert(_word);
       return _word.split('\n').join('')
     })
+
+    //console.log('12')
 
     _source = $.trim(_source)
 
@@ -230,6 +259,8 @@ let submitToGoogleTrans = function (_form) {
 
       // -----------
 
+      let btnPanel = $('<div style="display: inline-block"></div>').appendTo(testDiv)
+
       let _btn = $("<button type='button'></button>")
         .html('翻譯')
         .attr('pulipuli_base_url', baseUrl)
@@ -241,7 +272,39 @@ let submitToGoogleTrans = function (_form) {
           window.open(_url, '_blank', 'height=600,width=800,scrollbars=no')
         })
         // .css("float", "left")
-        .appendTo(testDiv)
+        .appendTo(btnPanel)
+
+        if ($(_form).attr('submit_type') !== 'submit_authors') {
+          // console.log("AAA")
+          $('<br />').appendTo(btnPanel)
+          $("<button type='button'></button>")
+            .html('複製')
+            .click(function () {
+              // 先取得後面兩個資料吧
+              let content = []
+              $(this).parents('.test-div:first').find('textarea').each((index, element) => {
+                content.push(element.value)
+              })
+
+              content = content.join('\n\n').trim()
+              console.log(content)
+
+              if (content === '') {
+                return
+              }
+
+              // 複製它
+              let copyInput = $('#copyInput')
+              if (copyInput.length === 0) {
+                copyInput = $('<textarea id="copyInput" style="position:absolute; top: -999px"></textarea>')
+                  .appendTo('body')
+              }
+              copyInput.val(content)
+              copyInput.eq(0).select();
+              document.execCommand("copy");
+            })
+            .appendTo(btnPanel)
+        }
 
       var _textarea = $("<textarea class='animated source panel-body'></textarea>")
         .val(oriSource)
@@ -472,6 +535,7 @@ $(function () {
 
   // ---------------------------------------
 
+  /*
   let _blurTimer
 
   $(window).blur(function () {
@@ -492,6 +556,7 @@ $(function () {
   $(window).focus(() => {
     clearTimeout(_blurTimer)
   })
+  */
 
   // ---------------------------------------
 
