@@ -178,7 +178,9 @@ let submitToGoogleTrans = function (_form) {
       // 接下來做作者部分的重整
       // console.log(_source)
       // console.log(_source.indexOf(' ('))
-      _source = _source.substr(0, _source.indexOf(' (')).trim()
+      if (_source.indexOf(' (') > -1) {
+        _source = _source.substr(0, _source.indexOf(' (')).trim()
+      }
       _source = _source.split(' and ').join(', ')
       let _authors = _source.split(',')
       let _outputAuthors = []
