@@ -1,4 +1,7 @@
 /* minifyOnSave */
+
+const DEBUG = false
+
 let submitToGoogleTrans = function (_form) {
   try {
     // var _source = $("#source").val();
@@ -263,16 +266,25 @@ let submitToGoogleTrans = function (_form) {
 
       // -----------
 
-      let btnPanel = $('<div style="display: inline-block"></div>').appendTo(testDiv)
+      let btnPanel = $('<div style="display: inline-block; text-align:center"></div>')
 
-      console.log([_form.source_lang.value, _form.target_lang.value])
-      let _btn = $("<button type='button'></button>")
-        .hide()
-        .attr('source_lang', _form.source_lang.value)
-        .attr('target_lang', _form.target_lang.value)
-        .html('翻譯')
-        .attr('pulipuli_base_url', baseUrl)
-        .click(function () {
+      // console.log([_form.source_lang.value, _form.target_lang.value])
+      let _btn = $('<select class="form-control"></select>')
+        // .attr('source_lang', _form.source_lang.value)
+
+      let _langSetting = [
+        ['zh-TW', '正體中文'],
+        ['zh-CN', '简体中文'],
+        ['ja', '日本語']]
+      for (let _i = 0; _i < _langSetting.length; _i++) {
+        _btn.append('<option value="' + _langSetting[_i][0] + '">' + _langSetting[_i][1] + '</option>')
+      }
+
+      _btn.attr('target_lang', _form.target_lang.value)
+        // .html('翻譯')
+        // .attr('pulipuli_base_url', baseUrl)
+        .val(_form.target_lang.value)
+        .change(function () {
           // 改用POST試試看
           /*
           var baseUrl = $(this).attr('pulipuli_base_url')
@@ -281,8 +293,8 @@ let submitToGoogleTrans = function (_form) {
           // window.open(_url, '_blank')
           window.open(_url, '_blank', 'height=600,width=800,scrollbars=no')
           */
-          let _source = $(this).parent().next().val()
-          $(this).parent().next().next().addClass('wait-trans')
+          let _source = $(this).parents('.test-div').find('textarea.source').val()
+          $(this).parents('.test-div').find('textarea.note').addClass('wait-trans')
 
           /*
           let win = window.open('transTemp.html', '_blank', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=10,height=10,left=1000000,top=10000000')
@@ -299,7 +311,7 @@ let submitToGoogleTrans = function (_form) {
           let iframeBody = $(iframewindow.document.body)
           iframeBody.find('#source').html(_source)
           iframeBody.find('#originalSource').val(_source)
-          iframewindow.setGoogleTransCookie($(this).attr('source_lang'), $(this).attr('target_lang'))
+          iframewindow.setGoogleTransCookie(this.value)
           iframewindow.googleTranslateElementInit()
           // console.log($(iframewindow.document.body).find('#source').length)
 
@@ -307,7 +319,7 @@ let submitToGoogleTrans = function (_form) {
 
         if ($(_form).attr('submit_type') !== 'submit_authors') {
 
-          $("<button type='button'></button>")
+          $('<button type="button" class="btn btn-success btn-block"></button>')
             .html('複製')
             .click(function () {
               if (document.cookie === '') {
@@ -321,7 +333,7 @@ let submitToGoogleTrans = function (_form) {
               })
 
               content = content.join('\n\n').trim()
-              console.log(content)
+              // console.log(content)
 
               if (content === '') {
                 return
@@ -346,7 +358,7 @@ let submitToGoogleTrans = function (_form) {
         .click(function () { this.select() })
         .appendTo(testDiv)
 
-      var _textareaNode = $("<textarea class='animated source panel-body note'></textarea>")
+      var _textareaNode = $("<textarea class='animated source panel-body note loading'></textarea>")
         // .css('width', 'calc(50% - 25px)')
         .click(function () { this.select() })
         .appendTo(testDiv)
@@ -354,6 +366,8 @@ let submitToGoogleTrans = function (_form) {
       if ($(_form).attr('submit_type') === 'submit_authors') {
         testDiv.addClass('submit_authors')
       }
+
+      btnPanel.appendTo(testDiv)
 
       var hideInputDiv = function () {
         $('.input-div .panel-body').slideUp()
@@ -370,7 +384,7 @@ let submitToGoogleTrans = function (_form) {
 
       if (_form.window_open_output.checked) {
         // console.log('okok')
-        setTimeout(() => _btn.click(), 500)
+        setTimeout(() => _btn.change(), 500)
       }
     } else {
       // _source = encodeURIComponent(_source);
@@ -569,10 +583,13 @@ $(function () {
 
   // ---------------------------------------
 
-  /*
   let _blurTimer
 
   $(window).blur(function () {
+    if (DEBUG === true) {
+      return
+    }
+
     _blurTimer = setTimeout(() => {
       // return;
       var _heading = $('.input-div .panel-heading.togglable')
@@ -590,7 +607,6 @@ $(function () {
   $(window).focus(() => {
     clearTimeout(_blurTimer)
   })
-  */
 
   // ---------------------------------------
 
@@ -607,5 +623,7 @@ $(function () {
 
 // 自動啟動
 $(() => {
-  // $('.submit_trans').click()
+  if (DEBUG === true) {
+    $('.submit_trans').click()
+  }
 })

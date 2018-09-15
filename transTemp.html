@@ -13,9 +13,9 @@ function ok() {
   isOK = true
 }
 
-function setGoogleTransCookie(source, target) {
+function setGoogleTransCookie(target) {
   //if (document.cookie === '') {
-  document.cookie = 'googtrans=/' + source + '/' + target;
+  document.cookie = 'googtrans=/auto/' + target;
   //}
 }
 
@@ -51,6 +51,7 @@ function callbackToOpener() {
     note.trigger("autosize.resize")
     note.focus()
     note.removeClass('wait-trans')
+    note.removeClass('loading')
     //window.close()
     location.reload()
   }, 500)
