@@ -276,7 +276,7 @@ let submitToGoogleTrans = function (_form) {
           window.open(_url, '_blank', 'height=600,width=800,scrollbars=no')
           */
           let _source = $(this).parent().next().val()
-          let win = window.open('blank.html', '_blank', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=780,height=200,top=' + (window.screen.height - 400) + ',left=' + (window.screen.width - 840))
+          let win = window.open('blank.html', '_blank', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=800,height=600')
           // win.document.body.innerHTML = '<!DOCTYPE html><html lang="en-US"><body><pre style="white-space: pre-wrap;">' + _source + '</pre><div id="google_translate_element"></div></body></html>'
           // $(win.document.body).append('<script type="text/javascript">function googleTranslateElementInit() {  new google.translate.TranslateElement({pageLanguage: "en"});}</script><script type="text/javascript" src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>')
           $(win).load(function () {
