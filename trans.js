@@ -212,9 +212,11 @@ let submitToGoogleTrans = function (_form) {
     }
 
     // 移除括號內的資料
-    _source = _source.replace(/\[.*?\]/g, '')
-    _source = _source.replace(/\(.*?\)/g, '')
-    _source = _source.replace(/\{.*?\}/g, '')
+    if (_form.trim_citation.checked) {
+      _source = _source.replace(/\[.*?\]/g, '')
+      _source = _source.replace(/\(.*?\)/g, '')
+      _source = _source.replace(/\{.*?\}/g, '')
+    }
 
     var oriSource = _source
     _source = encodeURIComponent(_source)
