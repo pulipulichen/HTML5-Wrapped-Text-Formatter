@@ -263,8 +263,11 @@ let submitToGoogleTrans = function (_form) {
 
       let btnPanel = $('<div style="display: inline-block"></div>').appendTo(testDiv)
 
+      console.log([_form.source_lang.value, _form.target_lang.value])
       let _btn = $("<button type='button'></button>")
         .hide()
+        .attr('source_lang', _form.source_lang.value)
+        .attr('target_lang', _form.target_lang.value)
         .html('翻譯')
         .attr('pulipuli_base_url', baseUrl)
         .click(function () {
@@ -294,6 +297,7 @@ let submitToGoogleTrans = function (_form) {
           let iframeBody = $(iframewindow.document.body)
           iframeBody.find('#source').html(_source)
           iframeBody.find('#originalSource').val(_source)
+          iframewindow.setGoogleTransCookie($(this).attr('source_lang'), $(this).attr('target_lang'))
           iframewindow.googleTranslateElementInit()
           // console.log($(iframewindow.document.body).find('#source').length)
 

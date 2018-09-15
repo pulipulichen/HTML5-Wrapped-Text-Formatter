@@ -57,17 +57,38 @@
                 -->
 
         <div>
-          <textarea name="source" class="animated source input-textarea" style="width: 100%;" placeholder="請輸入要翻譯的文字...">A related question in this study was how much time
-the students spent working with the materials. Overall,
-the amount of time the students spent studying the mod-
-ules seems alarmingly low, considering that the modules
-covered about 50% of the primary course content.</textarea>
+          <textarea name="source" class="animated source input-textarea" style="width: 100%;" placeholder="請輸入要翻譯的文字...">The major question was whether computer study times
+associated with undergraduate instruction reliably cor-
+related with test performance, which was considered a
+measure of how much a student learned in the course. In
+four separate semesters, positive and significant corre-
+lations with time were observed for 33% of the correla-
+tions involving multiple-choice questions, 13% of those
+involving short-answer questions, and 60% of those in-
+volving open-ended essay questions. An estimate of r 5
+.35 for the four case studies was highly significant. Over-
+all, the significant correlations between study time and
+test performance were consistent with the hypothesis that
+learning takes time. These results disagree with the find-
+ings of Smeaton and Keogh (1999), who reported non-
+significant correlations between five separate measures
+of computer usage and test performance. The results are
+also inconsistent with Hakstian’s (1971) Experiment 1,
+in which there was a significant negative correlation be-
+tween study time and objective test questions (multiple-
+choice, true/false, matching) and no significant correla-
+tion for essay questions; the results are only partially
+consistent with Hakstian’s Experiment 2, in which there
+was a significant correlation for objective test questions
+but not for essay questions.</textarea>
         </div>
         <div class="input-group">
             <label class="input-group-addon">
                 來源語系：
                 <select name="source_lang">
-                    <option value="en">English</option>
+                  <option value="en">English</option>
+                  <option value="zh-CN">简体中文</option>
+                  <option value="ja">日文</option>
                 </select>
             </label>
 
@@ -75,6 +96,8 @@ covered about 50% of the primary course content.</textarea>
                 翻譯語系：
                 <select name="target_lang">
                     <option value="zh-TW">正體中文</option>
+                    <option value="zh-CN">简体中文</option>
+                    <option value="ja">日文</option>
                 </select>
             </label>
         </div>
@@ -125,7 +148,7 @@ covered about 50% of the primary course content.</textarea>
         </div>
 </div>
     </div>
-
+<!-- position: absolute; top: 0vh; left: 0vw; z-index: -1; opacity: 0 -->
 <iframe id="transTempIframe" name="transTemp" src="transTemp.html" style="position: absolute; top: 0vh; left: 0vw; z-index: -1; opacity: 0"></iframe>
 
   </body>

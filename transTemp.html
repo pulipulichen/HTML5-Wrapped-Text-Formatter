@@ -13,10 +13,10 @@ function ok() {
   isOK = true
 }
 
-function setGoogleTransCookie() {
-  if (document.cookie === '') {
-    document.cookie = "googtrans=/en/zh-TW";
-  }
+function setGoogleTransCookie(source, target) {
+  //if (document.cookie === '') {
+  document.cookie = 'googtrans=/' + source + '/' + target;
+  //}
 }
 
 function googleTranslateElementInit() {
@@ -27,7 +27,7 @@ function googleTranslateElementInit() {
     return
   }
 
-  setGoogleTransCookie()
+  //setGoogleTransCookie()
 
   new google.translate.TranslateElement({
     //pageLanguage: 'en',
@@ -42,14 +42,6 @@ function callbackToOpener() {
     let originalSource = $('#originalSource').val()
 
     if (output === originalSource) {
-      if ($('.goog-te-combo').val().trim() === '') {
-        $('.goog-te-combo').val('zh-TW')
-        $('.goog-te-combo').change()
-        $('.goog-te-combo').click()
-        $('.goog-te-combo').mouseleave()
-        $('.goog-te-combo').mouseover()
-        console.log($('.goog-te-combo').val())
-      }
       callbackToOpener()
       return
     }
