@@ -278,6 +278,8 @@ let submitToGoogleTrans = function (_form) {
           */
           let _source = $(this).parent().next().val()
           $(this).parent().next().next().addClass('wait-trans')
+
+          /*
           let win = window.open('transTemp.html', '_blank', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=10,height=10,left=1000000,top=10000000')
           $(win).load(function () {
             // console.log($(win.document.body).find('#source').length)
@@ -285,6 +287,16 @@ let submitToGoogleTrans = function (_form) {
             $(win.document.body).find('#source').html(_source)
             $(win.document.body).find('#originalSource').val(_source)
           })
+          */
+          // 改用iframe
+          let iframe = $('#transTempIframe')[0]
+          let iframewindow= iframe.contentWindow? iframe.contentWindow : iframe.contentDocument.defaultView;
+          let iframeBody = $(iframewindow.document.body)
+          iframeBody.find('#source').html(_source)
+          iframeBody.find('#originalSource').val(_source)
+          iframewindow.googleTranslateElementInit()
+          // console.log($(iframewindow.document.body).find('#source').length)
+
         }).appendTo(btnPanel)
 
         if ($(_form).attr('submit_type') !== 'submit_authors') {
@@ -581,4 +593,8 @@ $(function () {
 
   // autosize用法：
   // http://www.jacklmoore.com/autosize/
+})
+
+$(() => {
+  $('.submit_trans').click()
 })
