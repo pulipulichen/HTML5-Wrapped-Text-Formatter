@@ -264,6 +264,7 @@ let submitToGoogleTrans = function (_form) {
       let btnPanel = $('<div style="display: inline-block"></div>').appendTo(testDiv)
 
       let _btn = $("<button type='button'></button>")
+        .hide()
         .html('翻譯')
         .attr('pulipuli_base_url', baseUrl)
         .click(function () {
@@ -276,23 +277,18 @@ let submitToGoogleTrans = function (_form) {
           window.open(_url, '_blank', 'height=600,width=800,scrollbars=no')
           */
           let _source = $(this).parent().next().val()
-          let win = window.open('blank.html', '_blank', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=800,height=600')
-          // win.document.body.innerHTML = '<!DOCTYPE html><html lang="en-US"><body><pre style="white-space: pre-wrap;">' + _source + '</pre><div id="google_translate_element"></div></body></html>'
-          // $(win.document.body).append('<script type="text/javascript">function googleTranslateElementInit() {  new google.translate.TranslateElement({pageLanguage: "en"});}</script><script type="text/javascript" src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>')
+          $(this).parent().next().next().addClass('wait-trans')
+          let win = window.open('transTemp.html', '_blank', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=10,height=10,left=1000000,top=10000000')
           $(win).load(function () {
             // console.log($(win.document.body).find('#source').length)
+            $(win.document.head).find('title').html(_source)
             $(win.document.body).find('#source').html(_source)
+            $(win.document.body).find('#originalSource').val(_source)
           })
-
-          // $(win.document.body).append('<script //src="http://localhost/html5-projects/HTML5-Wrapped-Text-Formatter/jquery.min.js"></script>')
-          // $(win.document.body).append('<script //src="http://localhost/html5-projects/HTML5-Wrapped-Text-Formatter/transInit.js"></script>')
-        })
-        // .css("float", "left")
-        .appendTo(btnPanel)
+        }).appendTo(btnPanel)
 
         if ($(_form).attr('submit_type') !== 'submit_authors') {
-          // console.log("AAA")
-          $('<br />').appendTo(btnPanel)
+
           $("<button type='button'></button>")
             .html('複製')
             .click(function () {

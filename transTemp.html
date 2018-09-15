@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <title></title>
+</head>
+<body>
+  <pre style="white-space: pre-wrap;" id="source" contenteditable="true" onclick="document.execCommand('selectAll',false,null);document.execCommand('copy')"></pre>
+  <textarea id="originalSource" style="display: none"></textarea>
+  <div id="google_translate_element"></div>
+  <script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  callbackToOpener()
+}
+function callbackToOpener() {
+  setTimeout(function () {
+    let output = $('#source').text()
+    let originalSource = $('#originalSource').val()
+
+    if (output === originalSource) {
+      callbackToOpener()
+      return
+    }
+
+    let note = window.opener.$(window.opener.document.body).find('.wait-trans')
+    note.val(output)
+    note.trigger("autosize.resize")
+    note.focus()
+    note.removeClass('wait-trans')
+    window.close()
+  }, 500)
+}
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
