@@ -267,11 +267,25 @@ let submitToGoogleTrans = function (_form) {
         .html('翻譯')
         .attr('pulipuli_base_url', baseUrl)
         .click(function () {
+          // 改用POST試試看
+          /*
           var baseUrl = $(this).attr('pulipuli_base_url')
-          var _url = baseUrl + $(this).next().val()
-          // alert(_url);
+          var _url = baseUrl + $(this).parent().next().val()
+          //alert(_url);
           // window.open(_url, '_blank')
           window.open(_url, '_blank', 'height=600,width=800,scrollbars=no')
+          */
+          let _source = $(this).parent().next().val()
+          let win = window.open('blank.html', '_blank', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=780,height=200,top=' + (window.screen.height - 400) + ',left=' + (window.screen.width - 840))
+          // win.document.body.innerHTML = '<!DOCTYPE html><html lang="en-US"><body><pre style="white-space: pre-wrap;">' + _source + '</pre><div id="google_translate_element"></div></body></html>'
+          // $(win.document.body).append('<script type="text/javascript">function googleTranslateElementInit() {  new google.translate.TranslateElement({pageLanguage: "en"});}</script><script type="text/javascript" src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>')
+          $(win).load(function () {
+            // console.log($(win.document.body).find('#source').length)
+            $(win.document.body).find('#source').html(_source)
+          })
+
+          // $(win.document.body).append('<script //src="http://localhost/html5-projects/HTML5-Wrapped-Text-Formatter/jquery.min.js"></script>')
+          // $(win.document.body).append('<script //src="http://localhost/html5-projects/HTML5-Wrapped-Text-Formatter/transInit.js"></script>')
         })
         // .css("float", "left")
         .appendTo(btnPanel)
