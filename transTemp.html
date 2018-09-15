@@ -12,6 +12,13 @@ let isOK = false
 function ok() {
   isOK = true
 }
+
+function setGoogleTransCookie() {
+  if (document.cookie === '') {
+    document.cookie = "googtrans=/en/zh-TW";
+  }
+}
+
 function googleTranslateElementInit() {
   if (isOK === false) {
     setTimeout(() => {
@@ -20,7 +27,13 @@ function googleTranslateElementInit() {
     return
   }
 
-  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  setGoogleTransCookie()
+
+  new google.translate.TranslateElement({
+    //pageLanguage: 'en',
+    autodisplay: false,
+    layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT
+  }, 'google_translate_element');
   callbackToOpener()
 }
 function callbackToOpener() {
@@ -29,6 +42,14 @@ function callbackToOpener() {
     let originalSource = $('#originalSource').val()
 
     if (output === originalSource) {
+      if ($('.goog-te-combo').val().trim() === '') {
+        $('.goog-te-combo').val('zh-TW')
+        $('.goog-te-combo').change()
+        $('.goog-te-combo').click()
+        $('.goog-te-combo').mouseleave()
+        $('.goog-te-combo').mouseover()
+        console.log($('.goog-te-combo').val())
+      }
       callbackToOpener()
       return
     }

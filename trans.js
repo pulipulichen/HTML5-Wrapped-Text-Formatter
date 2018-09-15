@@ -304,6 +304,10 @@ let submitToGoogleTrans = function (_form) {
           $("<button type='button'></button>")
             .html('複製')
             .click(function () {
+              if (document.cookie === '') {
+                document.cookie = "googtrans=/en/zh-TW";
+              }
+
               // 先取得後面兩個資料吧
               let content = []
               $(this).parents('.test-div:first').find('textarea').each((index, element) => {
