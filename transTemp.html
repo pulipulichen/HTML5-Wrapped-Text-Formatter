@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<html lang="en-US">
-<head>
-  <title></title>
-</head>
+<html>
 <body>
-  <pre style="white-space: pre-wrap;" id="source" contenteditable="true" onclick="document.execCommand('selectAll',false,null);document.execCommand('copy')"></pre>
+  <pre  id="source"></pre>
   <textarea id="originalSource" style="display: none"></textarea>
   <div id="google_translate_element"></div>
   <script type="text/javascript">
@@ -39,9 +36,9 @@ function googleTranslateElementInit() {
 function callbackToOpener() {
   setTimeout(function () {
     let output = $('#source').text()
-    let originalSource = $('#originalSource').val()
+    // let originalSource = $('#originalSource').val()
 
-    if (output === originalSource) {
+    if ($('.goog-te-combo').length === 0) {
       callbackToOpener()
       return
     }

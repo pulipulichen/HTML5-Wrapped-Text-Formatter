@@ -275,7 +275,8 @@ let submitToGoogleTrans = function (_form) {
       let _langSetting = [
         ['zh-TW', '正體中文'],
         ['zh-CN', '简体中文'],
-        ['ja', '日本語']]
+        ['ja', '日本語'],
+        ['en', 'English']]
       for (let _i = 0; _i < _langSetting.length; _i++) {
         _btn.append('<option value="' + _langSetting[_i][0] + '">' + _langSetting[_i][1] + '</option>')
       }
