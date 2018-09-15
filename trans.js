@@ -605,6 +605,7 @@ $(function () {
   // http://www.jacklmoore.com/autosize/
 })
 
+// 自動啟動
 $(() => {
-  $('.submit_trans').click()
+  // $('.submit_trans').click()
 })
