@@ -49,6 +49,7 @@
   width: calc(55% - 54px);
   height: auto;
   padding: 0;
+  font-size: 2rem;
 }
 
 .google_trans_20140526 .test-div.panel textarea.note {
