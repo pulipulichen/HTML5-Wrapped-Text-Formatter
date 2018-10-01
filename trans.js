@@ -22,6 +22,10 @@ let submitToGoogleTrans = function (_form) {
 
     // console.log('1')
 
+    // 過濾一些錯誤的詞彙
+    _source = _source.split('ﬀ').join('ff')
+    _source = _source.split('ﬁ').join('fi')
+
     do {
       _source = _source.split('  ').join(' ')
     }
