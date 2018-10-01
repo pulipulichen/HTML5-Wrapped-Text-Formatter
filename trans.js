@@ -42,8 +42,8 @@ let submitToGoogleTrans = function (_form) {
 
     if (_form.replace_fulltype.checked) {
       _source = _source.split('’').join("'")
-      _source = _source.split('”').join('""')
-      _source = _source.split('“').join('""')
+      _source = _source.split('”').join('"')
+      _source = _source.split('“').join('"')
     }
 
     // console.log('4')
