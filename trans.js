@@ -213,7 +213,7 @@ let submitToGoogleTrans = function (_form) {
           // _author = _firstName + ' ' + _lastName
           _author = _lastName + '\t' + _firstName
         }
-
+        _author = _author.trim()
         _outputAuthors.push(_author)
       }
       _source = _outputAuthors.join('\n')
@@ -317,6 +317,7 @@ let submitToGoogleTrans = function (_form) {
           let iframeBody = $(iframewindow.document.body)
           iframeBody.find('#source').html(_source)
           iframeBody.find('#originalSource').val(_source)
+          //console.log(this.value)
           iframewindow.setGoogleTransCookie(this.value)
           iframewindow.googleTranslateElementInit()
           // console.log($(iframewindow.document.body).find('#source').length)
@@ -358,13 +359,13 @@ let submitToGoogleTrans = function (_form) {
             .appendTo(btnPanel)
         }
 
-      var _textarea = $("<textarea class='animated source panel-body'></textarea>")
+      var _textarea = $("<textarea class='animated source original panel-body'></textarea>")
         .val(oriSource)
         // .css('width', 'calc(50% - 25px)')
         .click(function () { this.select() })
         .appendTo(testDiv)
 
-      var _textareaNode = $("<textarea class='animated source panel-body note loading'></textarea>")
+      var _textareaNode = $("<textarea class='animated source trans panel-body note loading'></textarea>")
         // .css('width', 'calc(50% - 25px)')
         .click(function () { this.select() })
         .appendTo(testDiv)
@@ -385,12 +386,15 @@ let submitToGoogleTrans = function (_form) {
         _textarea.focus()
         _textarea.click()
         _textarea.click(hideInputDiv)
+        _textareaNode.click(hideInputDiv)
+        btnPanel.click(hideInputDiv)
         $('.google-trans-title').hide()
       })
 
       if (_form.window_open_output.checked) {
         // console.log('okok')
         setTimeout(() => _btn.change(), 500)
+        window.scrollTo(0, 0)
       }
     } else {
       // _source = encodeURIComponent(_source);

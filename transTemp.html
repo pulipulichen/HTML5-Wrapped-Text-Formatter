@@ -27,11 +27,12 @@ function googleTranslateElementInit() {
   //setGoogleTransCookie()
 
   new google.translate.TranslateElement({
-    //pageLanguage: 'en',
+    //pageLanguage: 'zh_TW',
     autodisplay: false,
+    //autodisplay: true,
     layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT
   }, 'google_translate_element');
-  callbackToOpener()
+  document.getElementById("source").addEventListener("DOMSubtreeModified", callbackToOpener, false);
 }
 function callbackToOpener() {
   setTimeout(function () {
@@ -42,15 +43,33 @@ function callbackToOpener() {
       callbackToOpener()
       return
     }
+    
+    let originalSource = $('#originalSource').val()
+    if (output === originalSource) {
+      callbackToOpener()
+      return
+    }
 
     let note = window.top.$(window.top.document.body).find('.wait-trans')
     note.val(output)
     note.trigger("autosize.resize")
-    note.focus()
-    note.removeClass('wait-trans')
-    note.removeClass('loading')
-    //window.close()
-    location.reload()
+    setTimeout(() => {
+      //note.focus()
+      note.removeClass('wait-trans')
+      note.removeClass('loading')
+
+      /*
+      let offset = note.offset()
+      if (offset !== undefined) {
+        let top = offset.top
+        //console.log(top)
+        //window.top.document.body.scrollTo(0, top)
+      }
+      */
+      //window.close()
+      location.reload()
+    }, 0)
+      
   }, 500)
 }
 </script>

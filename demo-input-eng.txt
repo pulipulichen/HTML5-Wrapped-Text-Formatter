@@ -1,7 +1,6 @@
-Abstract
 Purpose – This work seeks to present a reading annotation and knowledge sharing tool, which can
 annotate a web page with HTML format archived by the Taiwan libraries’ history digital library
-based on Web 2.0 technologies
+based on Web 2.0 technologies.
 Design/methodology/approach – This work adopted DSpace, an open-source institutional
 repository system, to implement a Taiwan Digital Library History Library with the reading
 annotation tool for knowledge archiving and sharing services. A quasi-experimental design method
@@ -18,6 +17,3 @@ Originality/value – Collecting user-generated content is a novel research issu
 ﬁeld, and few studies have developed useful tools that allow readers to actively contribute their
 knowledge to digital libraries. This work shows how to implement such digital library systems and how
 the annotation tool beneﬁts the growth of digital archives and promotes learning performance.
-Keywords Digital libraries, Annotation, DSpace, Knowledge archiving, Knowledge sharing,
-Knowledge management, Taiwan
-Paper type Technical paper
