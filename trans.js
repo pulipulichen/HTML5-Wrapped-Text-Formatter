@@ -93,6 +93,7 @@ let submitToGoogleTrans = function (_form) {
       // _source = _googleTransUtils.str_replace("etc. \n\n", "etc. ", _source); //等
       _source = _source.replace(/etc\. \n\n[^A-Z]/g, stripNl)
 
+      _source = _source.split('–').join('– \n\n')
       _source = _source.split('。').join('。 \n\n')
       _source = _source.split('." ').join('." \n\n')
       _source = _source.split('." \n\n(').join('." (')
