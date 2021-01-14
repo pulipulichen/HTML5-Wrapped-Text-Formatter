@@ -597,7 +597,11 @@ $(function () {
 
   $(window).blur(function () {
     if (DEBUG === true) {
-      return
+      return false
+    }
+
+    if ($('[name="auto_reopen"]').prop("checked") === false) {
+      return false
     }
 
     _blurTimer = setTimeout(() => {

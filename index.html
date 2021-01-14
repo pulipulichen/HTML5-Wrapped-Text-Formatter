@@ -5,20 +5,31 @@
   <head>
     <title>Wrapped Text Formatter</title>
     <meta charset="UTF-8">
-    <link rel="icon" href="icon.ico" type="image/x-icon" />
-    <script src='jquery.min.js'></script>
+    <link rel="icon" href="assets/favicon/icon.ico" type="image/x-icon" />
+    <script src='vendors/jquery/jquery.min.js'></script>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="trans.css" />
-
+    <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css" />
+    
     <!-- Optional theme -->
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap-theme.min.css" />
 
     <!-- Latest compiled and minified JavaScript -->
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src='jquery.autosize.min.js'></script>
-    <script type="text/javascript" src="trans.js"></script>
+    <script type="text/javascript" src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src='vendors/jquery/jquery.autosize.min.js'></script>
+    
+    
+    <script src='https://cdn.jsdelivr.net/gh/FThompson/FormPersistence.js@2.0.6/form-persistence.min.js'></script>
+    
+    <!-- ============================ -->
+    
+    <!-- <script type="text/javascript" src="scripts/trans.min.js"></script> -->
+    <script type="text/javascript" src="scripts/trans.js"></script>
+    
+    <script type="text/javascript" src="scripts/form-persistence.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="styles/trans.min.css" /> -->
+    <link rel="stylesheet" href="styles/trans.css" />
 
   </head>
 
@@ -80,14 +91,16 @@
             </label>
         </div>
         <div class="input-group">
-
+           <label class="input-group-addon">
+              <input type="checkbox" name="auto_reopen" value="true" checked="checked"/> 翻譯後自動彈起
+          </label>
+          
           <label class="input-group-addon">
               <input type="checkbox" name="trim_dash" value="true" checked="checked"/> 接合破折號「-」
-          </label class="input-group-addon">
+          </label>
           <label class="input-group-addon">
               <input type="checkbox" name="trim_nl" value="true" checked="checked"/> 接合換行
           </label>
-
 
             <label class="input-group-addon">
                 <input type="checkbox" name="sentence_nl" value="true" checked="checked"/> 換句加大隔行

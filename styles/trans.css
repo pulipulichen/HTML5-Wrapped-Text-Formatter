@@ -62,7 +62,7 @@
 }
 
 .google_trans_20140526 .test-div.panel textarea.note.loading {
-  background-image: url(loading.svg);
+  background-image: url(../assets/loading.svg);
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
