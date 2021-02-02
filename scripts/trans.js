@@ -159,7 +159,7 @@ let submitToGoogleTrans = function (_form) {
       // alert(_word);
       return _word.split('\n').join('')
     })
-
+    
     //console.log('12')
 
     _source = $.trim(_source)
@@ -225,6 +225,13 @@ let submitToGoogleTrans = function (_form) {
       _source = _source.replace(/\(.*?\)/g, '')
       _source = _source.replace(/\{.*?\}/g, '')
     }
+
+    // 最後再檢視一次空格的問題
+    do {
+      _source = _source.split('  ').join(' ')
+    }
+    while (_source.indexOf('  ') > -1)
+
 
     var oriSource = _source
     _source = encodeURIComponent(_source)
