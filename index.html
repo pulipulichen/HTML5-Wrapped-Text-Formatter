@@ -1,168 +1,77 @@
 <!DOCTYPE html>
-<!-- @TODO: check manifest -->
 <html>
-<!-- <html manifest="trans.manifest"> -->
   <head>
     <title>Wrapped Text Formatter</title>
     <meta charset="UTF-8">
-    <link rel="icon" href="assets/favicon/icon.ico" type="image/x-icon" />
-    <script src='vendors/jquery/jquery.min.js'></script>
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap-theme.min.css" />
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script type="text/javascript" src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src='vendors/jquery/jquery.autosize.min.js'></script>
-    
-    
-    <script src='https://cdn.jsdelivr.net/gh/FThompson/FormPersistence.js@2.0.6/form-persistence.min.js'></script>
-    
-    <!-- ============================ -->
-    
-    <!-- <script type="text/javascript" src="scripts/trans.min.js"></script> -->
-    <script type="text/javascript" src="scripts/trans.js"></script>
-    
-    <script type="text/javascript" src="scripts/form-persistence.min.js"></script>
-
-    <!-- <link rel="stylesheet" href="styles/trans.min.css" /> -->
-    <link rel="stylesheet" href="styles/trans.css" />
-
-    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/assets/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/assets/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/assets/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/assets/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/assets/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon/assets/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon/assets/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/assets/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/assets/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="assets/favicon/assets/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/assets/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/assets/favicon-16x16.png">
-    <meta name="msapplication-TileColor" content="#A5673F">
-    <meta name="msapplication-TileImage" content="assets/favicon/assets/ms-icon-144x144.png">
-    <meta name="theme-color" content="#A5673F">
-    
+    <!-- https://www.favicon-generator.org/ -->
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/icon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/icon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/icon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/icon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/icon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon/icon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon/icon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/icon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/icon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="assets/favicon/icon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon/icon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/icon/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#3498DB">
+    <meta name="msapplication-TileImage" content="assets/favicon/icon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#3498DB">
     <link rel="manifest" href="./manifest.json">
+    
+    <script src="./vendors/jszip/jszip.min.js"></script>
+    <script src="./vendors/jszip/FileSaver.min.js"></script>
+    
+    <script src="./vendors/vue/vue.min.js"></script>
+    <script src="./vendors/jquery/jquery.min.js"></script>
+
+    <script src="./vendors/semantic-ui/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./vendors/semantic-ui/semantic.min.css">
+
+    <link rel="stylesheet/less" type="text/css" href="./styles/styles.less" />
+    <script src="./vendors/less/load-before-less.js"></script>
+    <script src="./vendors/less/less.min.js"></script>
+    
+    <script src="./vendors/date-helper.js"></script>
+
+    <script src="./vendors/vue/httpVueLoader.js"></script>
+    <script src="./vendors/vue/httpVueLoaderLess.js"></script>
+    
+    <script src="./vendors/utils/ClipboardUtils.js"></script>
   </head>
-
-
   <body>
 
-<div id="google_trans_20140526" class="google_trans_20140526">
-  <div class="output-container">
-    <div class="page-header google-trans-title">
-    <h1 style="text-align:center">
-      Wrapped Text Formatter
-    </h1>
-</div>
-<div class="test-output">
-</div>
+    <div id="app">
+      <app-input 
+        :db="db"
+        :config="config"
+        v-bind:localConfig2="localConfig"></app-input>
+      <app-output 
+        :db="db"
+        :config="config"
+        :localConfig="localConfig"></app-output>
     </div>
+    
 
+    <!-- ================================================ -->
+    
+    <script src="./config.js"></script>
+    <script src="./local-config.js"></script>
 
-<div class="panel panel-primary input-div">
-    <!--
-    Bootstrap 樣板
-    http://getbootstrap.com/components/#panelsg
-    -->
-    <div class="panel-heading togglable" onclick="_googleTransUtils.toggle_panel(this);">
-        <span class="icon-up glyphicon glyphicon-chevron-up" style="float:right"></span>
-        <span class="icon-down glyphicon glyphicon-chevron-down" style="float:right"></span>
-        <span class="glyphicon glyphicon-edit"></span>
-        <span class="panel-title">要翻譯的文字</span>
-    </div>
-        <div class="panel-body">
-            <form id="submitToGoogleTransForm" method="post">
-                <!--
-                <label>
-                    標題: <input type="text" name="subject" />
-                </label>
-                -->
-
-        <div>
-          <textarea name="source" class="animated source input-textarea" style="width: 100%;" placeholder="請輸入要翻譯的文字..."></textarea>
-        </div>
-        <div class="input-group">
-            <label class="input-group-addon" style="display: none;">
-                來源語系：
-                <select name="source_lang">
-                  <option value="en">English</option>
-                  <option value="zh-CN">简体中文</option>
-                  <option value="ja">日文</option>
-                </select>
-            </label>
-
-            <label class="input-group-addon">
-                翻譯語系：
-                <select name="target_lang">
-                    <option value="zh-TW">正體中文</option>
-                    <option value="en">English</option>
-                    <option value="zh-CN">简体中文</option>
-                    <option value="ja">日本語</option>
-                </select>
-            </label>
-        </div>
-        <div class="input-group">
-           <label class="input-group-addon">
-              <input type="checkbox" name="auto_reopen" value="true" checked="checked"/> 翻譯後自動彈起
-          </label>
-          
-          <label class="input-group-addon">
-              <input type="checkbox" name="trim_dash" value="true" checked="checked"/> 接合破折號「-」
-          </label>
-          <label class="input-group-addon">
-              <input type="checkbox" name="trim_nl" value="true" checked="checked"/> 接合換行
-          </label>
-
-            <label class="input-group-addon">
-                <input type="checkbox" name="sentence_nl" value="true" checked="checked"/> 換句加大隔行
-            </label>
-            <label class="input-group-addon">
-                <input type="checkbox" name="trim_citation" value="true" checked="checked"/> 刪除引言括號
-            </label>
-
-            <label class="input-group-addon">
-                <input type="checkbox" name="replace_fulltype" value="true" checked="checked"/> 全型引號變半形
-            </label>
-            <label class="input-group-addon" style="display: none">
-                <input type="checkbox" name="test_output" value="true" checked="checked" /> 文字重整
-            </label>
-            <label class="input-group-addon" style="display: none">
-                <input type="checkbox" name="window_open_output" value="true" checked="checked" /> 直接翻譯
-            </label>
-        </div>
-        <div style="text-align:center;margin-top: 0.5em;">
-            <button type="submit" class="btn btn-lg btn-default submit_trans" name="submit_trans" style="width: calc(50% - 10px)">
-                整理翻譯 (Ctrl + Enter)
-            </button>
-            <button type="submit" class="btn btn-lg btn-default submit_authors" name="submit_authors" style="width: calc(50% - 10px); margin-left: 16px;">
-                整理作者 (Alt + Enter)
-            </button>
-        </div>
-        <div style="text-align:center;display:none;">
-            <!--
-            <label>
-                <input type="radio" name="output_style" value="iframe" checked="true" /> 結果輸出在下方
-            </label>
-            -->
-            <label>
-                <input type="radio" name="output_style" value="blank" checked="checked" /> 結果輸出在開新視窗
-            </label>
-        </div>
-            </form>
-        </div>
-</div>
-    </div>
-<!-- position: absolute; top: 0vh; left: 0vw; z-index: -1; opacity: 0 -->
-<iframe id="transTempIframe" name="transTemp" src="transTemp.html" 
-        style="position: absolute; top: 0vh; left: 0vw; z-index: -1; opacity: 0"></iframe>
-
-        <script src="./service-worker-loader.js"></script>
+    <script src="./scripts/vue-app-computed.js"></script>
+    <script src="./scripts/vue-app-data.js"></script>
+    <script src="./scripts/vue-app-methods.js"></script>
+    <script src="./scripts/vue-app-mounted.js"></script>
+    <script src="./scripts/vue-app-watch.js"></script>
+    <script src="./scripts/vue-app-components.js"></script>
+    
+    <script src="./scripts/vue-app.js"></script>
+    
+    <script src="./service-worker-loader.js"></script>
   </body>
 </html>
