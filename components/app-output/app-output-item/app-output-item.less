@@ -1,0 +1,46 @@
+.header {
+  //line-height: 3rem;
+  height: 2rem;
+  font-size: 1rem;
+
+  padding-top: 0.3rem !important;
+  padding-bottom: 0 !important;
+
+  cursor: pointer;
+  user-select: none;
+
+  .date {
+    display: inline-block;
+  }
+  .text {
+    display: inline-block;
+    max-width: calc(100% - 10rem);
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    margin-left: 1rem;
+    font-weight: normal;
+
+    line-height: 1rem;
+    margin-top: 0.2rem;
+  }
+    
+}
+
+textarea {
+  max-height: max-content !important;
+  height: auto;
+  min-height: 3rem !important;
+}
+
+.controller {
+  select {
+    width: calc(100% - 3rem) !important;
+  }
+
+  .submit {
+    cursor: pointer !important;
+    pointer-events: all !important;
+  }
+}

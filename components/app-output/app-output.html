@@ -1,3 +1,6 @@
-<form class="app-output ui form">
-  {{ config.version }}
-</form>
+<div class="app-output">
+  <app-output-item
+    v-for="item in db.output" 
+    v-bind:item="item"
+    v-bind:db="db"></app-output-item>
+</div>

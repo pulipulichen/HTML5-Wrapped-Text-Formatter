@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <pre  id="source"></pre>
+  <textarea id="originalSource" style="display: none"></textarea>
+  <div id="google_translate_element"></div>
+  <script type="text/javascript">
+let isOK = false
+function ok() {
+  isOK = true
+}
+
+function setGoogleTransCookie(target) {
+  //if (document.cookie === '') {
+  document.cookie = 'googtrans=/auto/' + target;
+  //}
+}
+
+function googleTranslateElementInit() {
+  if (isOK === false) {
+    setTimeout(() => {
+      googleTranslateElementInit()
+    }, 1000)
+    return
+  }
+
+  //setGoogleTransCookie()
+
+  new google.translate.TranslateElement({
+    //pageLanguage: 'zh_TW',
+    autodisplay: false,
+    //autodisplay: true,
+    layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT
+  }, 'google_translate_element');
+  document.getElementById("source").addEventListener("DOMSubtreeModified", callbackToOpener, false);
+}
+function callbackToOpener() {
+  setTimeout(function () {
+    let output = $('#source').text()
+    // let originalSource = $('#originalSource').val()
+
+    if ($('.goog-te-combo').length === 0) {
+      callbackToOpener()
+      return
+    }
+    
+    let originalSource = $('#originalSource').val()
+    if (output === originalSource) {
+      callbackToOpener()
+      return
+    }
+
+    let note = window.top.$(window.top.document.body).find('#waitForTrans')
+    note.val(output)
+    // note.trigger("autosize.resize")
+    setTimeout(() => {
+      //note.focus()
+      // note.removeClass('wait-trans')
+      // note.removeClass('loading')
+
+      /*
+      let offset = note.offset()
+      if (offset !== undefined) {
+        let top = offset.top
+        //console.log(top)
+        //window.top.document.body.scrollTo(0, top)
+      }
+      */
+      //window.close()
+      location.reload()
+    }, 0)
+      
+  }, 500)
+}
+</script>
+
+<script type="text/javascript" src="vendors/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=ok"></script>
+
+</body>
+</html>

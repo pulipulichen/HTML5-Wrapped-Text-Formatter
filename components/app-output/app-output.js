@@ -1,5 +1,8 @@
 let appOutput = {
-  props: ['config', 'localConfig', 'db'],
+  props: ['db'],
+  components: {
+    'app-output-item': httpVueLoader('./app-output-item/app-output-item.vue'),
+  },
   data () {
     return {}
   },
