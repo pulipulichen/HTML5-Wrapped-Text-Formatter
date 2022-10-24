@@ -4,6 +4,7 @@ LOCAL_CONFIG = {
 
   detectClipboard: true,
   pasteClipboardAndTrans: true,
+  detectClipboardMinLength: 20,
 
   correctOCR: true,
   joinDash: true,

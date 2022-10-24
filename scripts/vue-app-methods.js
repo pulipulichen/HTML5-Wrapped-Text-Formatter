@@ -40,4 +40,5 @@ var appMethods = {
     // console.log(this.db.localConfig)
     // this.db.localConfig.joinDash = true
   },
+  ...appMethodsTest
 }

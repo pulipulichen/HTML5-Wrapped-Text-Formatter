@@ -1,100 +1,100 @@
 <form class="app-config ui form">
 
-  <div class="fields">
+  <div class="ui third segment fields">
     <div class="inline field">
       <div class="ui checkbox">
-        <input type="checkbox" tabindex="0" class="hidden"
-           id="detectClipboard"
-           v-model="db.localConfig.detectClipboard">
+        <input type="checkbox" tabindex="0" class="hidden" id="detectClipboard"
+          v-model="db.localConfig.detectClipboard">
         <label for="detectClipboard">自動貼上剪貼簿文字</label>
       </div>
     </div>
     <div class="inline field">
       <div class="ui checkbox">
-        <input type="checkbox" tabindex="0" class="hidden"
-           id="pasteClipboardAndTrans"
-           v-model="db.localConfig.pasteClipboardAndTrans">
+        <input type="checkbox" tabindex="0" class="hidden" id="pasteClipboardAndTrans"
+          v-model="db.localConfig.pasteClipboardAndTrans">
         <label for="pasteClipboardAndTrans">貼上剪貼簿文字後自動翻譯</label>
       </div>
     </div>
-  </div>
-    
-  <div class="inline field">
-    <div class="ui checkbox">
-      <input type="checkbox" tabindex="0" class="hidden"
-         id="correctOCR"
-         v-model="db.localConfig.correctOCR">
-      <label for="correctOCR">修正OCR問題</label>
+    <div class="field">
+      <label for="detectClipboardMinLength">偵測剪貼簿最低字數</label>
+      <div class="ui input">
+        <input type="number" id="pasteClipboardAndTrans"
+          v-model="db.localConfig.detectClipboardMinLength" />
+        </div>
     </div>
   </div>
 
-  <div class="inline field">
-    <div class="ui checkbox">
-      <input type="checkbox" tabindex="0" class="hidden"
-         id="convertPunctuationMarks"
-         v-model="db.localConfig.convertPunctuationMarks">
-      <label for="convertPunctuationMarks">標點符號重整</label>
+  <div class="ui third segment fields">
+    <div class="inline field">
+      <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" class="hidden" id="correctOCR" v-model="db.localConfig.correctOCR">
+        <label for="correctOCR">修正OCR問題</label>
+      </div>
+    </div>
+
+    <div class="inline field">
+      <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" class="hidden" id="convertPunctuationMarks"
+          v-model="db.localConfig.convertPunctuationMarks">
+        <label for="convertPunctuationMarks">標點符號重整</label>
+      </div>
+    </div>
+
+    <div class="inline field">
+      <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" class="hidden" id="remove_quote" v-model="db.localConfig.removeQuote">
+        <label for="remove_quote">移除引言括號</label>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ui third segment fields">
+    <div class="inline field">
+      <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" class="hidden" id="join_dash" v-model="db.localConfig.joinDash">
+        <label for="join_dash">接合破折號「-」</label>
+      </div>
+    </div>
+
+    <div class="inline field">
+      <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" class="hidden" id="join_new_line" v-model="db.localConfig.joinNewLine">
+        <label for="join_new_line">接合換行</label>
+      </div>
+    </div>
+
+    <div class="inline field">
+      <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" class="hidden" id="breakSentence" v-model="db.localConfig.breakSentence">
+        <label for="breakSentence">換句加入空白行</label>
+      </div>
+    </div>
+
+    <div class="inline field">
+      <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" class="hidden" id="add_padding_line"
+          v-model="db.localConfig.addPaddingLine">
+        <label for="add_padding_line">空白行加大</label>
+      </div>
     </div>
   </div>
 
-  <div class="inline field">
-    <div class="ui checkbox">
-      <input type="checkbox" tabindex="0" class="hidden"
-         id="join_dash"
-         v-model="db.localConfig.joinDash">
-      <label for="join_dash">接合破折號「-」</label>
+
+
+  <div class="ui third segment fields">
+    <div class="inline field">
+      <label for="trans_from">來源語系</label>
+      <select name="trans_from" v-model="db.localConfig.transFromLang">
+        <option v-for="lang in db.config.langs" :value="lang.value">{{ lang.text }}</option>
+      </select>
     </div>
-  </div>
 
-  <div class="inline field">
-    <div class="ui checkbox">
-      <input type="checkbox" tabindex="0" class="hidden"
-         id="join_new_line"
-         v-model="db.localConfig.joinNewLine">
-      <label for="join_new_line">接合換行</label>
+    <div class="inline field">
+      <label for="trans_to">翻譯成</label>
+      <select name="trans_to" v-model="db.localConfig.transToLang">
+        <option v-for="lang in db.config.langs" :value="lang.value">{{ lang.text }}</option>
+      </select>
     </div>
-  </div>
-
-  <div class="inline field">
-    <div class="ui checkbox">
-      <input type="checkbox" tabindex="0" class="hidden"
-         id="remove_quote"
-         v-model="db.localConfig.removeQuote">
-      <label for="remove_quote">移除引言括號</label>
-    </div>
-  </div>
-
-  <div class="inline field">
-    <div class="ui checkbox">
-      <input type="checkbox" tabindex="0" class="hidden"
-         id="breakSentence"
-         v-model="db.localConfig.breakSentence">
-      <label for="breakSentence">換句加入空白行</label>
-    </div>
-  </div>
-
-  <div class="inline field">
-    <div class="ui checkbox">
-      <input type="checkbox" tabindex="0" class="hidden"
-         id="add_padding_line"
-         v-model="db.localConfig.addPaddingLine">
-      <label for="add_padding_line">空白行加大</label>
-    </div>
-  </div>
-
-  <div class="inline field">
-    <label for="trans_from">來源語系</label>
-    <select name="trans_from" v-model="db.localConfig.transFromLang">
-      <option v-for="lang in db.config.langs"
-        :value="lang.value">{{ lang.text }}</option>
-    </select>
-  </div>
-
-  <div class="inline field">
-    <label for="trans_to">翻譯成</label>
-    <select name="trans_to" v-model="db.localConfig.transToLang">
-      <option v-for="lang in db.config.langs"
-        :value="lang.value">{{ lang.text }}</option>
-    </select>
   </div>
 </form>

@@ -1,14 +1,14 @@
 <div class="app-input">
   <div class="ui top attached center aligned blue inverted segment header"
-       @click="db.localConfig.showInputPanel = !db.localConfig.showInputPanel">
+       @click="showInputPanel = !showInputPanel">
     <h1>
       <i class="icon chevron circle"
-         :class="{'down': !db.localConfig.showInputPanel, 'up': db.localConfig.showInputPanel}"></i>
+         :class="{'down': !showInputPanel, 'up': showInputPanel}"></i>
       Wrapped Text Formatter
     </h1>
   </div>
   <div class="ui secondary bottom attached segment form"
-       :class="{'hidden': !db.localConfig.showInputPanel}">
+       :class="{'hidden': !showInputPanel}">
     <div class="ui grid">
       <div class="eight wide column">
         <div class="field">

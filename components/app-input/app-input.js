@@ -5,8 +5,10 @@ let appInput = {
   },
   data () {
     return {
+      showInputPanel: true,
       enableDetectClipboard: true,
-      lastClipbaordText: null
+      lastClipbaordText: null,
+      isDrafting: false
     }
   },
   mounted () {
@@ -17,7 +19,11 @@ let appInput = {
       // console.log(this.db)
     // }, 3000)
     //this.testFormatText202210232207Chinese()
-    this.testFormatText202210232208EnglishDash()
+
+    // setTimeout(() => {
+    //   this.testFormatText202210232208EnglishDash()
+    // }, 1000)
+    // console.log(this.isDrafting)
   },
   computed: {
     transToLang () {
@@ -52,6 +58,12 @@ let appInput = {
     },
   },
   watch: {
+    'db.localConfig.input' (input) {
+      if (input !== '' && this.$parent.inited === true) {
+        this.isDrafting = true
+        // console.log(this.isDrafting)
+      }
+    }
   },
   methods: {
     formatText () {
@@ -65,60 +77,94 @@ let appInput = {
       result = this.formatJoinDash(result)
       result = this.formatJoinNewLine(result)
       result = this.formatRemoveQuote(result)
+      result = this.formatConvertPunctuationMarks(result)
       // result = this.formatConvertQuotationToHalf(result)
       result = this.formatBreakSentence(result)
       result = this.formatAddPaddingLine(result)
 
       result = result.trim()
 
-      this.db.output.unshift({
+      this.$parent.$refs.AppOutput.addOutputItem({
         date: new Date(),
         text: result,
         transToLang: this.transToLang,
         transResult: ``
       })
 
-      this.db.localConfig.showInputPanel = false
+      this.showInputPanel = false
       this.db.localConfig.input = ''
       this.enableDetectClipboard = false
-    },
-    testFormatText202210232207Chinese () {
-      this.db.localConfig.input = `在國內,語言學 (linguistics) 或 語言科學 (linguistic science) 仍 然是一門相當陌生而新奇的學間。不但一般社會大眾對語言學素昧平 生 , 就是大多數從事語文 (不管是中文、中語或外文、外語) 教學的 人對於語言學研究的目標、方法以及對語言教學的可能貢獻都不甚了 解。其實,人類對語言的關心與興趣有相當久遠的歷史。早在公元前 四世紀,印度的高僧巴尼尼 (Panini) LA} WX (Sanskrit) 經書的讀 音留下了相當精密而明確的描述;而在差不多與此同時,希臘的哲儒 柏拉圖 (Plato, 427-347 B.C.) 與哲學家亞里斯多德 (Aristotle, 384-322 B.C.) 也發表了不少有關語言方面的論述。及至羅馬帝國 (Roman Empire, 27 B.C.) 興起,拉丁文遂成為支配全歐洲政治、經濟、法 律、文化、社會與學術的 共通語 (lingua franca)。各地學者爭相研究 拉丁文法,並試圖在拉丁文法的間架上建立起 地方語 (vernacular) 的文法來。到了十九世紀末葉,大英帝國 (the British Empire) 的國 威與影響力獲得空前的伸展,英語在國際上的地位遂取代了從前的拉 丁文與法語,一時各國研究英語語法的學者 (如 O. Jespersen, G_O. Curme, H. Poutsma, E. Kruisinga 等) 人才輩出。一九三零年代前後 , 凌國 結構學派 (structuralistb 語言學家 (其代表人物為E. Sapir BEL. Bloomfield) 從事北美印地安語言的研究,並以自認為科學的方法逐`
-      this.formatText()
-    },
-    testFormatText202210232208EnglishDash () {
-      this.db.localConfig.input = `The  following  general  steps  are  suggested  for  constructing  a  thesaurus: 
-1.  Identify  the  subject  field.  The  boundaries  of  the  subject  field  should 
-be  clearly  defined  and  the  parameters  set  to  indicate  which areas  will 
-be  emphasized  and  which  will  be  given  only  cursory  treatment.
-2.  Identify  the  nature  of  the  literature  to  be  indexed.  Is  it  primarily 
-journal  literature?  Or  does  it  consist  of  books,  reports,  conference 
-papers,  etc.?  Is  it  retrospective  or  current?  If  it  is  retrospective,  then 
-it  will  be  more  complex  to  make  changes  in  the  thesaurus.  Will  most 
-of  the  material  be  on  the  Web? 
-3.  Identify  the  users.  What  are  their  information  needs?  Will  they  be 
-doing  their  own  searching  or  will  someone  do  it  for  them?  Will  their 
-questions  be  broad  or  specific? 
-4.  Identify  the  file  structure.  Will  this  be  a  pre-coordinated  or  post- 
-coordinated  system? 
-5.  Consult  published  indexes,  glossaries,  dictionaries,  and  other  tools 
-in  the  subject  areas  for  the  raw vocabulary.  This  should  not be  done 
-necessarily  with  the  idea  of  copying  terms,  but  such  perusal  can  in- 
-crease  the  thesaurus  designer’s  understanding  of  the  terminology 
-and  semantic  relationships  in  the  field. 
-6.  Cluster  the  terms. 
-7.  Establish  term  relationships. `
-      this.formatText()
+      this.isDrafting = false
+      // console.log(this.isDrafting)
     },
     formatAuthor () {
-      this.db.localConfig.showInputPanel = false
-      console.log('formatAuthor')
+      this.showInputPanel = false
+      
+      let _source = this.db.localConfig.input
+
+      // 接下來做作者部分的重整
+      // console.log(_source)
+      // console.log(_source.indexOf(' ('))
+      if (this.transFromLang.startsWith('zh')) {
+        if (_source.indexOf('（') > -1) {
+          _source = _source.slice(0, _source.indexOf('（'))
+        }
+          _source = _source.trim().split('、').map(name => name.trim()).join('\n')
+      }
+
+      else {
+        if (_source.indexOf(' (') > -1) {
+          _source = _source.substr(0, _source.indexOf(' (')).trim()
+        }
+        _source = _source.split(' and ').join(', ')
+        let _authors = _source.split(',')
+        let _outputAuthors = []
+        // console.log(_authors)
+
+        let _skipInterval = 2
+        if (_authors.length % 2 === 1) {
+          _skipInterval = 1
+        }
+
+        for (let _i = 0, _len = _authors.length; _i < _len; _i = _i + _skipInterval) {
+          let _author = _authors[_i]
+          if (_skipInterval === 2) {
+            _author = _author + ', ' + _authors[(_i + 1)]
+          }
+          // console.log(_author)
+          _author = _author.split('&').join('')
+          let _nameSeperator = _author.indexOf(', ')
+          if (_nameSeperator > -1) {
+            let _lastName = _author.substr(0, _nameSeperator).trim()
+            let _firstName = _author.slice(_nameSeperator + 1, _author.length).trim()
+            // _author = _firstName + ' ' + _lastName
+            _author = _lastName + '\t' + _firstName
+          }
+          _author = _author.trim()
+          _outputAuthors.push(_author)
+        }
+        _source = _outputAuthors.join('\n')
+      }
+
+      this.$parent.$refs.AppOutput.addAuthorItem({
+        date: new Date(),
+        text: _source
+      })
     },
     setupDetectClipboard () {
       let detectTimer
-      window.addEventListener('focus', () => {
-        if (this.db.localConfig.detectClipboard) {
+      window.addEventListener('focus', async () => {
+        if (this.db.localConfig.detectClipboard 
+            && this.enableDetectClipboard
+            && !this.isDrafting) {
           this.getInputFromClipboard()
+        }
+
+        if (this.isDrafting === true) {
+          if (!(await this.appendClipboardToInput() ) && 
+            this.db.localConfig.input.endsWith('\n') === false) {
+            this.db.localConfig.input = this.db.localConfig.input + '\n'
+          }
         }
       })
 
@@ -130,30 +176,97 @@ and  semantic  relationships  in  the  field.
         clearTimeout(detectTimer)
         setTimeout(() => {
           this.enableDetectClipboard = true
-        }, 5000)
+        }, 1000)
       })
     },
-    getInputFromClipboard () {
-      navigator.clipboard.readText()
-        .then(text => {
-          if (this.lastClipbaordText === text) {
-            return false
-          }
-          // console.log('Pasted content: ', text);
+    getInputFromClipboard: async function () {
+      let text = await this.getTextFromClipboard()
+      if (this.isClipboardAllow(text) === false) {
+        return false
+      }
 
-          this.lastClipbaordText = text
+      if (this.lastClipbaordText === text) {
+        return false
+      }
+      // console.log('Pasted content: ', text);
+
+      this.lastClipbaordText = text
+      this.db.localConfig.input = text
+      
+      if (this.db.localConfig.pasteClipboardAndTrans) {
+        this.formatText()
+        setTimeout(() => {
           this.db.localConfig.input = text
-          
-          if (this.db.localConfig.pasteClipboardAndTrans) {
-            this.formatText()
-          }
-          else {
-            this.db.localConfig.showInputPanel = true
-          }
-        })
+          this.isDrafting = false
+        }, 50)
+        
+      }
+      else {
+        this.showInputPanel = true
+      }
+    },
+    appendClipboardToInput: async function () {
+      // console.log(this.isDrafting)
+      if (!this.db.localConfig.detectClipboard || this.isDrafting === false) {
+        return false
+      }
+
+      let text = await this.getTextFromClipboard()
+      if (this.isClipboardAllow(text) === false) {
+        return false
+      }
+      if (this.lastClipbaordText === text || 
+        this.db.localConfig.input.trim() === text.trim()) {
+        return false
+      }
+
+      if (text.trim() === this.db.localConfig.input.trim()) {
+        return false
+      }
+
+      if (!this.db.localConfig.input.endsWith('\n')) {
+        this.db.localConfig.input = this.db.localConfig.input + '\n'
+      }
+      this.db.localConfig.input = this.db.localConfig.input + text
+
+      this.lastClipbaordText = text
+
+      return true
+    },
+    getTextFromClipboard () {
+      return new Promise((resolve, reject) => {
+        navigator.clipboard.readText()
+        .then(resolve)
         .catch(err => {
-          console.error('Failed to read clipboard contents: ', err);
+          reject('Failed to read clipboard contents: ' + err);
         });
+      })
+    },
+    isClipboardAllow (text) {
+      if (text.length < this.db.localConfig.detectClipboardMinLength) {
+        return false
+      }
+
+      text = text.trim()
+
+      if (text.indexOf(' ') === -1 && 
+        (text.indexOf('，') === -1 || text.indexOf('。') === -1)) {
+        return false
+      }
+
+      // 如果文字是輸出結果中的某幾行，那我們不動
+      let recentOutputs = $('.app-output').children().slice(0, 3)
+      // console.log(recentOutputs.length, recentOutputs.find('textarea').length)
+      let textareaList = recentOutputs.find('textarea')
+      // let outputTexts = []
+      for (let i = 0; i < textareaList.length; i++) {
+        let value = textareaList.eq(i).val()
+        if (value.indexOf(text) > -1) {
+          return false
+        }
+      }
+      
+      return true
     },
     hasChinese (text) {
       return /[\u4e00-\u9fa5]/.test(text)
@@ -163,8 +276,13 @@ and  semantic  relationships  in  the  field.
         return _source
       }
 
-      _source = _source.split('ﬀ').join('ff')
-      _source = _source.split('ﬁ').join('fi')
+      Object.keys(this.db.config.OCRCorrectList).forEach((from) => {
+        let to = this.db.config.OCRCorrectList[from]
+        // _source = _source.split('ﬀ').join('ff')
+        _source = _source.replace(new RegExp(from, 'g'), to)
+      })
+      
+      // _source = _source.split('ﬁ').join('fi')
 
       do {
         _source = _source.split('  ').join(' ')
@@ -192,6 +310,10 @@ and  semantic  relationships  in  the  field.
         }
         // _source = _googleTransUtils.str_replace('-\n', '', _source)
         text = text.split('-\n').join('')
+
+        text = text.replace(/[a-zA-Z]\-[\s]+[a-zA-Z]/g, (match) => {
+          return match[0] + match[3]
+        })
       }
 
       return text
@@ -216,8 +338,52 @@ and  semantic  relationships  in  the  field.
         return text
       }
 
-      text = text.replace(/\n\d+$/g, '')
-      text = text.replace(/\n\d+ /g, '\n')
+      let output = []
+      let isHalf = true
+      let leftPos = text.indexOf('(')
+      if (leftPos === -1) {
+        isHalf = false
+        leftPos = text.indexOf('(')
+      }
+      if (leftPos === -1) {
+        return text
+      }
+
+      let splitor = ['(', ')']
+      if (isHalf === false) {
+        splitor = ['（', '）']
+      }
+     
+      text.split(splitor[0]).forEach((t, i) => {
+        // console.log(t, i)
+        if (i === 0) {
+          output.push(t)
+          return true
+        }
+
+        let pos = t.lastIndexOf(splitor[1])
+        if (pos === -1) {
+          output.push(splitor[0] + t)
+          return true
+        }
+
+        // let partInBrackets = t.slice(0, pos)
+        let partOutBrackets = t.slice(pos + 1)
+
+        output.push(partOutBrackets)
+      })
+
+      text = output.join('')
+
+      while (text.indexOf('  ') > -1) {
+        text = text.replace(/  /g, ' ')
+      }
+
+      if (this.transFromLang.startsWith('zh')) {
+        text = this.removeSpaceInChinese(text)
+        // console.log(text)
+      }
+      
 
       return text
     },
@@ -237,10 +403,16 @@ and  semantic  relationships  in  the  field.
         text = this.processTextNotBrackets(text, (t) => {
           t = t.replace(/\, /g, '，')
           t = t.replace(/\,/g, '，')
-          t = t.replace(/([\u4e00-\u9fa5]\s[\u4e00-\u9fa5])/g, (match) => {
-            return match[0] + match[2]
-          })
-
+          t = t.replace(/\?/g, '？')
+          t = t.replace(/\:/g, '：')
+          t = t.replace(/\;/g, '；')
+          // t = t.replace(/([\u4e00-\u9fa5]\s[\u4e00-\u9fa5])/g, (match) => {
+          //   return match[0] + match[2]
+          // })
+          t = this.removeSpaceInChinese(t)
+          t = this.replaceInChinese(t, '{', '《')
+          t = this.replaceInChinese(t, '}', '》')
+          
           return t
         })
       }
@@ -248,6 +420,29 @@ and  semantic  relationships  in  the  field.
       text = text.split('’').join("'")
       text = text.split('”').join('"')
       text = text.split('“').join('"')
+
+      return text
+    },
+    removeSpaceInChinese (text) {
+      //https://blog.miniasp.com/post/2019/01/02/Common-Regex-patterns-for-Unicode-characters
+      // return text.replace(/([\u4e00-\u9fa5\uFF01-\uFF5E\u3000-\u3003\u3008-\u300F\u3010-\u3011\u3014-\u3015\u301C-\u301E][\s]+[\u4e00-\u9fa5\uFF01-\uFF5E\u3000-\u3003\u3008-\u300F\u3010-\u3011\u3014-\u3015\u301C-\u301E])/g, (match) => {
+      //   return match[0] + match[2]
+      // })
+      return this.replaceInChinese(text, '[\\s]+')
+    },
+    replaceInChinese (text, from, to = '') {
+      //https://blog.miniasp.com/post/2019/01/02/Common-Regex-patterns-for-Unicode-characters
+      const hanRange = `\\u4e00-\\u9fa5\\uFF01-\\uFF5E\\u3000-\\u3003\\u3008-\\u300F\\u3010-\\u3011\\u3014-\\u3015\\u301C-\\u301E`
+      
+      text = text.replace(new RegExp(`([0-9${hanRange}]${from}[0-9${hanRange}])`, 'g'), (match) => {
+        return match[0] + to + match[2]
+      })
+      text = text.replace(new RegExp(`([a-zA-Z]${from}[${hanRange}])`, 'g'), (match) => {
+        return match[0] + to + match[2]
+      })
+      text = text.replace(new RegExp(`([${hanRange}]${from}[a-zA-Z])`, 'g'), (match) => {
+        return match[0] + to + match[2]
+      })
 
       return text
     },
@@ -269,7 +464,7 @@ and  semantic  relationships  in  the  field.
       }
      
       text.split(splitor[0]).forEach((t, i) => {
-        console.log(t, i)
+        // console.log(t, i)
         if (i === 0) {
           t = handler(t)
           output.push(t)
@@ -332,6 +527,13 @@ and  semantic  relationships  in  the  field.
           _s = this.replaceAndTrim(_s, `.'`)
           _s = this.replaceAndTrim(_s, `."`)
           _s = this.replaceAndTrim(_s, `; '`)
+
+          _s = _s.split('• ').join('\n• ')
+
+          // The two different basic philosophies are (1) to strive for an exhaustive list of resources and (2) to be more selective by carefully evaluating documents before linking them into the system.
+          // _s = _s.replace(/\s\([0-9]+\)\s/g, (match) => {
+          //   return '\n' + match.slice(1)
+          // })
           
           // _s = this.replaceAndTrim(_s, `-`)
           
@@ -378,9 +580,10 @@ and  semantic  relationships  in  the  field.
         
       }
       
+      // 20221023-2352 每一行都做trim
+      _source = _source.split('\n').map(line => line.trim()).join('\n')
 
       // 20221023-2239 把數字斷回來
-
       _source = _source.replace(/\n[0-9]+.\n/g, (match) => {
         return '\n' + match.trim() + ' '
       })
@@ -404,8 +607,11 @@ and  semantic  relationships  in  the  field.
       return _source
     },
     formatAddPaddingLine (text) {
-      
+      text = text.trim()
       if (!this.db.localConfig.addPaddingLine) {
+        while (text.indexOf('\n\n') > -1) {
+          text = text.replace(/\n\n/g, '\n')
+        }
         return text
       }
 
