@@ -1,6 +1,6 @@
 {
-  "name": "Icon Builder",
-  "short_name": "IconBuilder",
+  "name": "Wrapped Text Formatter",
+  "short_name": "TextFormatter",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#3498DB",
