@@ -281,6 +281,10 @@ let appInput = {
         // _source = _source.split('ﬀ').join('ff')
         _source = _source.replace(new RegExp(from, 'g'), to)
       })
+
+      if (this.transFromLang.startsWith('zh')) {
+        _source = this.replaceInChinese(_source, '. ', '')
+      }
       
       // _source = _source.split('ﬁ').join('fi')
 
@@ -403,6 +407,10 @@ let appInput = {
         text = this.processTextNotBrackets(text, (t) => {
           t = t.replace(/\, /g, '，')
           t = t.replace(/\,/g, '，')
+
+          // 修正數字的問題
+          t = t.replace(/[0-9]，[0-9]/g, (matched) => matched[0] + matched[2])
+
           t = t.replace(/\?/g, '？')
           t = t.replace(/\:/g, '：')
           t = t.replace(/\;/g, '；')
@@ -514,6 +522,7 @@ let appInput = {
         _source = this.str_replace(' ）', ') ', _source)
         _source = this.str_replace(')  ', ') ', _source)
 
+        _source = _source.replace(/\n，\n/g, '\n')
       }
 
       if (this.transFromLang === 'en') {
