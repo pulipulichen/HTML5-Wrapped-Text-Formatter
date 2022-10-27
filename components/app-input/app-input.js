@@ -24,6 +24,12 @@ let appInput = {
     //   this.testFormatText202210232208EnglishDash()
     // }, 1000)
     // console.log(this.isDrafting)
+
+    setTimeout(() => {
+      if (this.db.localConfig.input === '' && this.db.localConfig.lastInputText !== '') {
+        this.db.localConfig.input = this.db.localConfig.lastInputText
+      }
+    }, 500)
   },
   computed: {
     transToLang () {
@@ -66,13 +72,28 @@ let appInput = {
     }
   },
   methods: {
-    formatText () {
+    formatText: async function () {
       
       // console.log('formatText')
 
       let result = this.db.localConfig.input
+      if (result === '') {
+        let textFromClipboard = await this.getTextFromClipboard()
+        if (textFromClipboard !== '') {
+          result = textFromClipboard
+        }
+        else if (this.db.localConfig.lastInputText !== '') {
+          result = this.db.localConfig.lastInputText
+        }
+        else {
+          return false
+        }
+      }
+      console.log(result)
+      this.db.localConfig.lastInputText = result
 
       result = this.formatCorrectOCR(result)
+      // console.log(result)
       result = this.formatConvertPunctuationMarks(result)
       result = this.formatJoinDash(result)
       result = this.formatJoinNewLine(result)
@@ -101,6 +122,7 @@ let appInput = {
       this.showInputPanel = false
       
       let _source = this.db.localConfig.input
+      this.db.localConfig.lastInputText = _source
 
       // 接下來做作者部分的重整
       // console.log(_source)
@@ -282,8 +304,10 @@ let appInput = {
         _source = _source.replace(new RegExp(from, 'g'), to)
       })
 
+      // console.log(_source)
+
       if (this.transFromLang.startsWith('zh')) {
-        _source = this.replaceInChinese(_source, '. ', '')
+        _source = this.replaceInChinese(_source, '\\. ', '')
       }
       
       // _source = _source.split('ﬁ').join('fi')
@@ -299,6 +323,8 @@ let appInput = {
         _source = _source.split('\t').join(' ')
       }
       while (_source.indexOf('\t') > -1)
+
+      // console.log(_source)
 
       return _source.trim()
     },
@@ -404,6 +430,7 @@ let appInput = {
       }
 
       if (this.transFromLang.startsWith('zh')) {
+        // console.log(text)
         text = this.processTextNotBrackets(text, (t) => {
           t = t.replace(/\, /g, '，')
           t = t.replace(/\,/g, '，')
@@ -414,6 +441,8 @@ let appInput = {
           t = t.replace(/\?/g, '？')
           t = t.replace(/\:/g, '：')
           t = t.replace(/\;/g, '；')
+          t = this.replaceInChinese(t, ';', '；')
+          
           // t = t.replace(/([\u4e00-\u9fa5]\s[\u4e00-\u9fa5])/g, (match) => {
           //   return match[0] + match[2]
           // })
@@ -443,13 +472,13 @@ let appInput = {
       const hanRange = `\\u4e00-\\u9fa5\\uFF01-\\uFF5E\\u3000-\\u3003\\u3008-\\u300F\\u3010-\\u3011\\u3014-\\u3015\\u301C-\\u301E`
       
       text = text.replace(new RegExp(`([0-9${hanRange}]${from}[0-9${hanRange}])`, 'g'), (match) => {
-        return match[0] + to + match[2]
+        return match[0] + to + match[(match.length - 1)]
       })
       text = text.replace(new RegExp(`([a-zA-Z]${from}[${hanRange}])`, 'g'), (match) => {
-        return match[0] + to + match[2]
+        return match[0] + to + match[(match.length - 1)]
       })
       text = text.replace(new RegExp(`([${hanRange}]${from}[a-zA-Z])`, 'g'), (match) => {
-        return match[0] + to + match[2]
+        return match[0] + to + match[(match.length - 1)]
       })
 
       return text

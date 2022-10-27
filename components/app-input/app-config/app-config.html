@@ -22,6 +22,14 @@
           v-model="db.localConfig.detectClipboardMinLength" />
         </div>
     </div>
+
+    <div class="inline field">
+      <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" class="hidden" id="autoCopyText"
+          v-model="db.localConfig.autoCopyText">
+        <label for="autoCopyText">自動複製原文</label>
+      </div>
+    </div>
   </div>
 
   <div class="ui third segment fields">

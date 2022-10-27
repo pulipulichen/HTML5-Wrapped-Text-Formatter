@@ -1,16 +1,35 @@
 <div class="app-input">
   <div class="ui top attached center aligned blue inverted segment header"
        @click="showInputPanel = !showInputPanel">
-    <h1>
-      <i class="icon chevron circle"
-         :class="{'down': !showInputPanel, 'up': showInputPanel}"></i>
-      Wrapped Text Formatter
-    </h1>
+    <div class="ui grid">
+      <div class="four wide left aligned column">
+        <button type="button" class="ui mini button"
+          @click.stop="formatText">
+          處理剪貼簿
+        </button>
+      </div>
+      <div class="eight wide column">
+        <h1>
+          <i class="icon chevron circle"
+             :class="{'down': !showInputPanel, 'up': showInputPanel}"></i>
+          Wrapped Text Formatter
+        </h1>
+      </div>
+      <div class="four wide column"></div>
+    </div>
+    
   </div>
   <div class="ui secondary bottom attached segment form"
        :class="{'hidden': !showInputPanel}">
     <div class="ui grid">
       <div class="eight wide column">
+        <div class="field">
+          <button type="button" 
+            class="ui fluid button"
+            :class="{disabled: (db.localConfig.lastInputText === '' || db.localConfig.lastInputText.trim() === db.localConfig.input.trim())}"
+            @click="db.localConfig.input = db.localConfig.lastInputText">讀取上次原始文本</button>
+        </div>
+
         <div class="field">
           <textarea class="input" id="input"
             @keypress.ctrl.enter="formatText"

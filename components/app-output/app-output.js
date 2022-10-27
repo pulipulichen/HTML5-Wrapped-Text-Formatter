@@ -81,7 +81,11 @@ let appOutput = {
       else {
         setTimeout(() => {
           this.trans(template)
-          this.copyPlainString(item.text)
+
+          if (this.db.localConfig.autoCopyText) {
+            this.copyPlainString(item.text)
+          }
+          
         }, 50)
       }
 
