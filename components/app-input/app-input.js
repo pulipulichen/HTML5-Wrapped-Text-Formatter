@@ -81,15 +81,16 @@ let appInput = {
         let textFromClipboard = await this.getTextFromClipboard()
         if (textFromClipboard !== '') {
           result = textFromClipboard
+          this.db.localConfig.input = result
         }
         else if (this.db.localConfig.lastInputText !== '') {
           result = this.db.localConfig.lastInputText
+          this.db.localConfig.input = result
         }
         else {
           return false
         }
       }
-      console.log(result)
       this.db.localConfig.lastInputText = result
 
       result = this.formatCorrectOCR(result)
@@ -333,7 +334,7 @@ let appInput = {
         return text
       }
 
-      if (this.transFromLang === 'en') {
+      // if (this.transFromLang === 'en') {
         while (text.indexOf(' \n') > -1) {
           // _source = _googleTransUtils.str_replace(' \n', '\n', _source)
           text = text.split(' \n').join('\n')
@@ -344,7 +345,7 @@ let appInput = {
         text = text.replace(/[a-zA-Z]\-[\s]+[a-zA-Z]/g, (match) => {
           return match[0] + match[3]
         })
-      }
+      // }
 
       return text
     },
@@ -619,7 +620,16 @@ let appInput = {
       }
       
       // 20221023-2352 每一行都做trim
-      _source = _source.split('\n').map(line => line.trim()).join('\n')
+      _source = _source.split('\n').map(line => {
+        line = line.trim()
+        if (line.endsWith(' .')) {
+          line = line.slice(0, -2) + '.'
+        }
+        if (line.endsWith(' ;')) {
+          line = line.slice(0, -2) + ';'
+        }
+        return line
+      }).join('\n')
 
       // 20221023-2239 把數字斷回來
       _source = _source.replace(/\n[0-9]+.\n/g, (match) => {

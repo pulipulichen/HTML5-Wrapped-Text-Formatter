@@ -192,13 +192,15 @@ let appOutput = {
             originalText = originalText.trim()
           }
 
-          while (transText.indexOf('\n\n') > -1) {
+          while (transText && transText.indexOf('\n\n') > -1) {
             transText = transText.replace(/\n\n/g, '\n')
             transText = transText.trim()
           }
           
           itemTemplate.find('.original-text').val(originalText)
-          itemTemplate.find('.trans-text').val(transText)
+          if (transText) {
+            itemTemplate.find('.trans-text').val(transText)
+          }
           itemTemplate.removeClass('expended-empty-lines')
           itemTemplate.find('.original-text').select()
         }
@@ -216,18 +218,21 @@ let appOutput = {
             originalText = originalText.trim()
           }
 
-          while (transText.indexOf('\n\n') == -1) {
+          while (transText && transText.indexOf('\n\n') == -1) {
             transText = transText.replace(/\n/g, '\n\n')
             transText = transText.trim()
           }
 
-          while (transText.indexOf('\n\n\n') > -1) {
+          while (transText && transText.indexOf('\n\n\n') > -1) {
             transText = transText.replace(/\n\n\n/g, '\n\n')
             transText = transText.trim()
           }
 
           itemTemplate.find('.original-text').val(originalText)
-          itemTemplate.find('.trans-text').val(transText)
+          if (transText) {
+            itemTemplate.find('.trans-text').val(transText)
+          }
+          
           itemTemplate.addClass('expended-empty-lines')
           itemTemplate.find('.original-text').select()
         }
