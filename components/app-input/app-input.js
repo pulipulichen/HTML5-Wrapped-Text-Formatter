@@ -177,9 +177,9 @@ let appInput = {
     setupDetectClipboard () {
       let detectTimer
       window.addEventListener('focus', async () => {
-        if (this.db.localConfig.detectClipboard 
-            && this.enableDetectClipboard
-            && !this.isDrafting) {
+        if (this.db.localConfig.detectClipboard && 
+            this.enableDetectClipboard && 
+            !this.isDrafting) {
           this.getInputFromClipboard()
         }
 
@@ -238,7 +238,7 @@ let appInput = {
       if (this.isClipboardAllow(text) === false) {
         return false
       }
-      if (this.lastClipbaordText === text || 
+      if (this.lastClipbaordText.trim() === text.trim() || 
         this.db.localConfig.input.trim() === text.trim()) {
         return false
       }
@@ -250,7 +250,15 @@ let appInput = {
       if (!this.db.localConfig.input.endsWith('\n')) {
         this.db.localConfig.input = this.db.localConfig.input + '\n'
       }
-      this.db.localConfig.input = this.db.localConfig.input + text
+
+      if (this.lastClipbaordText.trim() !== this.db.localConfig.input.trim()) {
+        this.db.localConfig.input = this.db.localConfig.input + text
+      }
+      else {
+        this.db.localConfig.input = text + '\n'
+        this.isDrafting = false
+      }
+        
 
       this.lastClipbaordText = text
 

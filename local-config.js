@@ -4,8 +4,8 @@ LOCAL_CONFIG = {
 
   lastInputText: ``,
 
-  detectClipboard: true,
-  pasteClipboardAndTrans: true,
+  detectClipboard: false,
+  pasteClipboardAndTrans: false,
   detectClipboardMinLength: 20,
   autoCopyText: true,
 
