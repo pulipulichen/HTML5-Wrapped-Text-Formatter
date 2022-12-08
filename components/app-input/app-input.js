@@ -454,7 +454,9 @@ let appInput = {
           t = t.replace(/\?/g, '？')
           t = t.replace(/\:/g, '：')
           t = t.replace(/\;/g, '；')
+          t = t.replace(/。\^/g, '。')
           t = this.replaceInChinese(t, ';', '；')
+          t = this.replaceInChinese(t, '\\?', '？')
           
           // t = t.replace(/([\u4e00-\u9fa5]\s[\u4e00-\u9fa5])/g, (match) => {
           //   return match[0] + match[2]
@@ -463,6 +465,8 @@ let appInput = {
           t = this.replaceInChinese(t, '{', '《')
           t = this.replaceInChinese(t, '}', '》')
           
+          
+
           return t
         })
       }
@@ -470,6 +474,9 @@ let appInput = {
       text = text.split('’').join("'")
       text = text.split('”').join('"')
       text = text.split('“').join('"')
+
+      // console.log(text.split('\n^\n'))
+      // text = text.replace(/\n^\n/g, '\n')
 
       return text
     },
@@ -581,6 +588,7 @@ let appInput = {
         _source = this.str_replace(')  ', ') ', _source)
 
         _source = _source.replace(/\n，\n/g, '\n')
+        _source = _source.replace(/\n^\n/g, '\n')
 
         _source = _source.replace(/\n\n」/g, '」\n\n')
       }
