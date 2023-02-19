@@ -42,6 +42,7 @@ let appOutput = {
                 <button type="button" class="collapse-empty-lines ui button">刪除空白換行</button>
                 <button type="button" class="expand-empty-lines ui button">加大空白換行</button>
                 <button type="button" class="copy-original-text ui button">複製原文</button>
+                <button type="button" class="copy-original-text-no-empty-lines ui button">複製無空白行原文</button>
                 <button type="button" class="copy-trans-text ui button">複製翻譯</button>
                 <button type="button" class="copy-dual-text ui button">複製原文跟翻譯</button>
                 <button type="button" class="remove-item ui button">移除</button>
@@ -169,6 +170,16 @@ let appOutput = {
       this.setupEmptyLinesEvent(template)
 
       this.addClickEvent(template, '.copy-original-text', (itemTemplate, originalText, transText) => {
+        this.copyPlainString(originalText)
+      })
+
+      this.addClickEvent(template, '.copy-original-text-no-empty-lines', (itemTemplate, originalText, transText) => {
+        if (originalText.indexOf('\n\n') > -1) {
+          while (originalText.indexOf('\n\n') > -1) {
+            originalText = originalText.replace(/\n\n/g, '\n')
+            originalText = originalText.trim()
+          }
+        }
         this.copyPlainString(originalText)
       })
 
