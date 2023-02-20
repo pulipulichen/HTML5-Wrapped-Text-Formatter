@@ -13,6 +13,7 @@ LOCAL_CONFIG = {
   joinDash: true,
   joinNewLine: true,
   removeQuote: true,
+  removeDoubleSpaces: true,
   // convertQuotationToHalf: true,
   breakSentence: true,
   addPaddingLine: true,

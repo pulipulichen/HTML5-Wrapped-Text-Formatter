@@ -99,6 +99,7 @@ let appInput = {
       result = this.formatJoinDash(result)
       result = this.formatJoinNewLine(result)
       result = this.formatRemoveQuote(result)
+      result = this.formatRemoveDoubleSpaces(result)
       result = this.formatConvertPunctuationMarks(result)
       // result = this.formatConvertQuotationToHalf(result)
       result = this.formatBreakSentence(result)
@@ -427,6 +428,17 @@ let appInput = {
         // console.log(text)
       }
       
+
+      return text
+    },
+    formatRemoveDoubleSpaces (text) {
+      if (!this.db.localConfig.removeDoubleSpaces) {
+        return text
+      }
+      
+      while (text.indexOf('  ') > -1) {
+        text = text.replace(/  /g, ' ')
+      }
 
       return text
     },
