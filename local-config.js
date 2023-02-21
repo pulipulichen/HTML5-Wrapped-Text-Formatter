@@ -16,6 +16,7 @@ LOCAL_CONFIG = {
   removeDoubleSpaces: true,
   autoCapitalize: true,
   autoAppendPeriod: true,
+  removeListItem: true,
   // convertQuotationToHalf: true,
   breakSentence: true,
   addPaddingLine: true,

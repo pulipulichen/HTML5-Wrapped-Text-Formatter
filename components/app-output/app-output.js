@@ -36,7 +36,7 @@ let appOutput = {
       </div>
       <div class="ui segment content">
         <form class="ui grid form">
-          <div class="seven wide column original-column">
+          <div class="eight wide column original-column">
             <div class="field">
               <div class="ui fluid mini buttons">
                 <button type="button" class="collapse-empty-lines ui button">刪除空白換行</button>
@@ -53,7 +53,7 @@ let appOutput = {
             </div>
               
           </div>
-          <div class="nine wide column trans-column">
+          <div class="eight wide column trans-column">
             <div class="ui mini icon fluid input field">
               <select class="trans-to-lang">
               </select>
