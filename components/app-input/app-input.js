@@ -757,6 +757,10 @@ let appInput = {
         }
 
         line = line.trim()
+        if (line.indexOf(' ') === -1) {
+          return line
+        }
+
         let lastChar = line.slice(-1)
         
         if (".。:;：；…」".indexOf(lastChar) === -1) {
