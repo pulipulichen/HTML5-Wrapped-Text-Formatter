@@ -14,6 +14,8 @@ LOCAL_CONFIG = {
   joinNewLine: true,
   removeQuote: true,
   removeDoubleSpaces: true,
+  autoCapitalize: true,
+  autoAppendPeriod: true,
   // convertQuotationToHalf: true,
   breakSentence: true,
   addPaddingLine: true,

@@ -104,6 +104,8 @@ let appInput = {
       // result = this.formatConvertQuotationToHalf(result)
       result = this.formatBreakSentence(result)
       result = this.formatAddPaddingLine(result)
+      result = this.formatAutoCapitalize(result)
+      result = this.formatAutoAppendPeriod(result)
 
       result = result.trim()
 
@@ -719,6 +721,54 @@ let appInput = {
         text = text.split('\n\n\n').join('\n\n')
         text = text.trim()
       }
+
+      return text
+    },
+    formatAutoCapitalize (text) {
+      
+      if (!this.db.localConfig.autoCapitalize || this.hasChinese(text)) {
+        return text
+      }
+      
+      text = text.split('\n').map(line => {
+        if (line.length === 0) {
+          return line
+        }
+        line = line.trim()
+        let firstChar = line.slice(0, 1)
+        firstChar = firstChar.toUpperCase()
+        line = firstChar + line.slice(1)
+
+        return line
+      }).join('\n')
+
+      return text
+    },
+    formatAutoAppendPeriod (text) {
+      
+      if (!this.db.localConfig.autoAppendPeriod) {
+        return text
+      }
+      
+      text = text.split('\n').map(line => {
+        if (line.length === 0) {
+          return line
+        }
+
+        line = line.trim()
+        let lastChar = line.slice(-1)
+        
+        if (".。:;：；…」".indexOf(lastChar) === -1) {
+          if (this.hasChinese(line)) {
+            line = line + '。'
+          }
+          else {
+            line = line + '.'
+          }
+        }
+
+        return line
+      }).join('\n')
 
       return text
     },
