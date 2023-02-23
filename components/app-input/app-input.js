@@ -390,7 +390,7 @@ let appInput = {
       let leftPos = text.indexOf('(')
       if (leftPos === -1) {
         isHalf = false
-        leftPos = text.indexOf('(')
+        leftPos = text.indexOf('（')
       }
       if (leftPos === -1) {
         return text
@@ -540,8 +540,9 @@ let appInput = {
       let leftPos = text.indexOf('(')
       if (leftPos === -1) {
         isHalf = false
-        leftPos = text.indexOf('(')
+        leftPos = text.indexOf('（')
       }
+      // console.log({isHalf, leftPos})
       if (leftPos === -1) {
         return handler(text)
       }
@@ -551,6 +552,7 @@ let appInput = {
         splitor = ['（', '）']
       }
      
+      // console.log(text.split(splitor[0]))
       text.split(splitor[0]).forEach((t, i) => {
         // console.log(t, i)
         if (i === 0) {
@@ -559,7 +561,8 @@ let appInput = {
           return true
         }
 
-        let pos = t.lastIndexOf(splitor[1])
+        // let pos = t.lastIndexOf(splitor[1])
+        let pos = t.indexOf(splitor[1])
         if (pos === -1) {
           output.push(splitor[0] + t)
           return true
@@ -571,6 +574,8 @@ let appInput = {
 
         output.push(splitor[0] + partInBrackets + splitor[1] + partOutBrackets)
       })
+
+      // console.log(output)
 
       return output.join('')
     },
