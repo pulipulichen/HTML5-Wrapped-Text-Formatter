@@ -762,13 +762,18 @@ let appInput = {
         }
 
         line = line.trim()
-        if (line.indexOf(' ') === -1) {
+        if (this.hasChinese(line) === false && 
+            line.indexOf(' ') === -1) {
           return line
         }
 
         let lastChar = line.slice(-1)
+        // console.log(lastChar)
         
-        if (".。:;：；…」".indexOf(lastChar) === -1) {
+        if (".。:;：；…」?？!！".indexOf(lastChar) === -1) {
+          if ('，'.indexOf(lastChar) !== -1) {
+            line = line.slice(0, -1)
+          }
           if (this.hasChinese(line)) {
             line = line + '。'
           }
