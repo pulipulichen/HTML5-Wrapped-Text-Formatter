@@ -219,7 +219,7 @@ let appOutput = {
 
       this.addClickEvent(template, '.expand-empty-lines', (itemTemplate, originalText, transText) => {
         if (originalText.indexOf('\n\n') == -1) {
-          while (originalText.indexOf('\n\n') == -1) {
+          while (originalText.indexOf('\n') > -1 && originalText.indexOf('\n\n') == -1) {
             originalText = originalText.replace(/\n/g, '\n\n')
             originalText = originalText.trim()
           }
@@ -229,7 +229,7 @@ let appOutput = {
             originalText = originalText.trim()
           }
 
-          while (transText && transText.indexOf('\n\n') == -1) {
+          while (transText && transText.indexOf('\n') > -1 && transText.indexOf('\n\n') == -1) {
             transText = transText.replace(/\n/g, '\n\n')
             transText = transText.trim()
           }
