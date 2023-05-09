@@ -101,6 +101,7 @@ let appInput = {
       result = this.formatRemoveQuote(result)
       result = this.formatRemoveQuoteSquareBrackets(result)
       result = this.formatRemoveDoubleSpaces(result)
+      result = this.formatRemoveNumberNextToPeriod(result)
       result = this.formatConvertPunctuationMarks(result)
       // result = this.formatConvertQuotationToHalf(result)
       result = this.formatBreakSentence(result)
@@ -487,6 +488,23 @@ let appInput = {
         return text
       }
       
+      while (text.indexOf('  ') > -1) {
+        text = text.replace(/  /g, ' ')
+      }
+
+      return text
+    },
+    formatRemoveNumberNextToPeriod (text) {
+      if (!this.db.localConfig.removeNumberNextToPeriod || 
+          this.transFromLang !== 'en') {
+        return text
+      }
+      
+      console.log(text)
+      text = text.replace(/\.\d+ /g, '. ')
+      text = text.replace(/\.\d+$/g, '.')
+      console.log(text)
+
       while (text.indexOf('  ') > -1) {
         text = text.replace(/  /g, ' ')
       }

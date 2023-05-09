@@ -14,6 +14,7 @@ LOCAL_CONFIG = {
   joinNewLine: true,
   removeQuote: true,
   removeDoubleSpaces: true,
+  removeNumberNextToPeriod: true,
   autoCapitalize: true,
   autoAppendPeriod: true,
   removeListItem: true,
