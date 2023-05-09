@@ -500,11 +500,11 @@ let appInput = {
         return text
       }
       
-      console.log(text)
+      // console.log(text)
       text = text.replace(/\.\d+ /g, '. ')
       text = text.replace(/\.\d+$/g, '.')
-      console.log(text)
-
+      // console.log(text) 
+ 
       while (text.indexOf('  ') > -1) {
         text = text.replace(/  /g, ' ')
       }
