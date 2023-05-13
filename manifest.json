@@ -4,7 +4,7 @@
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#3498DB",
-  "theme_color": "#2980B9",
+  "theme_color": "#a5673f",
   "description": "Format clipboard from PDF.",
   "icons": [{
    "src": "assets/favicon/icon/android-icon-36x36.png",
