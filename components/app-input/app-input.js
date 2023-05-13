@@ -872,7 +872,8 @@ let appInput = {
       }
       
       let rules = [
-        '• '
+        '• ',
+        ' '
       ]
 
       text = text.split('\n').map(line => {
