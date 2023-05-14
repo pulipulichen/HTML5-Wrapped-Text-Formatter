@@ -559,6 +559,7 @@ let appInput = {
           t = this.replaceInChinese(t, '}', '》')
           
           // console.log(t)
+          t = this.replaceInChinese(t, 'j，', '」，')          
           t = this.replaceInChinese(t, 'j。', '」。')          
 
           return t
