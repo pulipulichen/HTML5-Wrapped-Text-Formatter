@@ -402,7 +402,7 @@ let appInput = {
 
       return output.join('')
     },
-    stripNl: function (_word) {
+    stripNewLine: function (_word) {
       return _word.split('\n').join('')
     },
     replaceAndTrim (text, char) {

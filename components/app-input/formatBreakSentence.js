@@ -51,15 +51,21 @@ let formatBreakSentence = function (text) {
     //   _s = _s.split('; ').join('; \n\n')
 
       // _s = _googleTransUtils.str_replace("e.g. \n\n", "e.g. ", _s); //舉例
-      _s = _s.replace(/e\.g\. \n\n[^A-Z]/g, this.stripNl)
+      _s = _s.replace(/e\.g\. \n\n[^A-Z]/g, this.stripNewLine)
 
       // _s = _googleTransUtils.str_replace("i.e. \n\n", "i.e. ", _s); //即
-      _s = _s.replace(/i\.e\. \n\n[^A-Z]/g, this.stripNl)
+      _s = _s.replace(/i\.e\. \n\n[^A-Z]/g, this.stripNewLine)
 
       // _s = _googleTransUtils.str_replace("et al. \n\n", "et al. ", _s); //等
-      _s = _s.replace(/et al\. \n\n[^A-Z]/g, this.stripNl)
+      _s = _s.replace(/et al\. \n\n[^A-Z]/g, this.stripNewLine)
       // _s = _googleTransUtils.str_replace("etc. \n\n", "etc. ", _s); //等
-      _s = _s.replace(/etc\. \n\n[^A-Z]/g, this.stripNl)
+      _s = _s.replace(/etc\. \n\n[^A-Z]/g, this.stripNewLine)
+      
+      // console.log(_s.split('\n'))
+      _s = _s.replace(/\s[A-Z]\.\n[A-Z]/g, function (_word) {
+        // console.log(_word)
+        return _word.split('\n').join(' ')
+      })
 
       // _s = _s.split('." ').join('." \n\n')
       _s = _s.split('." \n\n(').join('." (')
