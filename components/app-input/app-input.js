@@ -115,6 +115,7 @@ let appInput = {
       this.$parent.$refs.AppOutput.addOutputItem({
         date: new Date(),
         text: result,
+        transFromLang: this.transFromLang,
         transToLang: this.transToLang,
         transResult: ``
       })
