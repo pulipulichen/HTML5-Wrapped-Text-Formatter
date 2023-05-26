@@ -48,8 +48,9 @@ let addOutputItem = function (item) {
           </div>
           <div class="field">
             <div class="ui fluid mini buttons">
-              <button type="button" class="copy-prompt-sentences-original ui button">列點</button>
-              <button type="button" class="copy-prompt-keywords-original ui button">關鍵字</button>
+              <button type="button" class="copy-prompt-sentences-original ui button">Sentences</button>
+              <button type="button" class="copy-prompt-keywords-original ui button">Keywords</button>
+              <button type="button" class="copy-prompt-mindmap-original ui button">Mind Map</button>
               <a href="https://chat.openai.com/" target="chatgpt" class="ui button">ChatGPT</a>
             </div>
           </div>
