@@ -24,19 +24,19 @@ let addOutputItem = function (item) {
           </div>
         </div>
         <div class="inline fields">
-          <div class=" inline tiny field">
+          <div class=" inline tiny three wide field">
             <label>
               Min
             </label>
             <input type="number" class="prompt-min prompt-limit" min="1" value="${this.promptMin}" />
           </div>
-          <div class="tiny inline field">
+          <div class="tiny inline three wide field">
             <label>
               Max
             </label>
             <input type="number" class="prompt-max prompt-limit" min="1" value="${this.promptMax}" />
           </div>
-          <div class="tiny inline field">
+          <div class="tiny inline four wide field">
             <label>
               改寫
             </label>
@@ -46,11 +46,11 @@ let addOutputItem = function (item) {
               <option value="longer">longer</option>
             </select>
           </div>
-          <div class="field">
+          <div class="six wide field">
             <div class="ui fluid mini buttons">
-              <button type="button" class="copy-prompt-sentences-original ui button">Sentences</button>
-              <button type="button" class="copy-prompt-keywords-original ui button">Keywords</button>
-              <button type="button" class="copy-prompt-mindmap-original ui button">Mind Map</button>
+              <button type="button" class="copy-prompt-sentences-original ui button">句子</button>
+              <button type="button" class="copy-prompt-keywords-original ui button">關鍵字</button>
+              <button type="button" class="copy-prompt-mindmap-original ui button">心智圖</button>
               <a href="https://chat.openai.com/" target="chatgpt" class="ui button">ChatGPT</a>
             </div>
           </div>
@@ -71,8 +71,9 @@ let addOutputItem = function (item) {
         <div class="fields">
           <div class=" eight wide field">
             <div class="ui fluid mini buttons">
-              <button type="button" class="copy-prompt-sentences-trans ui button">列點</button>
+              <button type="button" class="copy-prompt-sentences-trans ui button">句子</button>
               <button type="button" class="copy-prompt-keywords-trans ui button">關鍵字</button>
+              <button type="button" class="copy-prompt-mindmap-trans ui button">心智圖</button>
               <a href="https://chat.openai.com/" target="chatgpt" class="ui button">ChatGPT</a>
             </div>
           </div>

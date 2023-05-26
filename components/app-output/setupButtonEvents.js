@@ -136,6 +136,13 @@ let setupButtonEvents = function (template) {
         }
       }
     }
+    else if (type === 'mindmap') {
+      
+      promptLeader = `Please convert the following text into a mind map${modifyPrompt}: `
+      if (lang !== 'en') {
+        promptLeader = `請將下面文字整理成心智圖，用tab縮排${modifyPrompt}：`
+      }
+    }
 
     return promptLeader
   }
@@ -150,6 +157,11 @@ let setupButtonEvents = function (template) {
     this.copyPlainString(promptLeader + '\n\n' + originalText)
   })
 
+  this.addClickEvent(template, '.copy-prompt-mindmap-original', (itemTemplate, originalText, transText, fromLang, toLang) => {
+    let promptLeader = buildPrompt(itemTemplate, 'mindmap', fromLang)
+    this.copyPlainString(promptLeader + '\n\n' + originalText)
+  })
+
   this.addClickEvent(template, '.copy-prompt-sentences-trans', (itemTemplate, originalText, transText, fromLang, toLang) => {
     let promptLeader = buildPrompt(itemTemplate, 'sentences', toLang)
     this.copyPlainString(promptLeader + '\n\n' + transText)
@@ -157,6 +169,11 @@ let setupButtonEvents = function (template) {
 
   this.addClickEvent(template, '.copy-prompt-keywords-trans', (itemTemplate, originalText, transText, fromLang, toLang) => {
     let promptLeader = buildPrompt(itemTemplate, 'keywords', toLang)
+    this.copyPlainString(promptLeader + '\n\n' + transText)
+  })
+
+  this.addClickEvent(template, '.copy-prompt-mindmap-trans', (itemTemplate, originalText, transText, fromLang, toLang) => {
+    let promptLeader = buildPrompt(itemTemplate, 'mindmap', toLang)
     this.copyPlainString(promptLeader + '\n\n' + transText)
   })
 

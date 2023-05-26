@@ -14,3 +14,9 @@ transform following text as a mind map in markmap format:
 請將以下文字轉換成markmap格式：
 
 https://markmap.js.org/repl
+
+transform following text as a mind map with raw tab indentation, not hierarchical bullet-point format:
+
+transform following text as a mind map in YAML format:
+
+transform following text as a mind map with just tab indent, no html format:
