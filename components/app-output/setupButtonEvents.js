@@ -49,6 +49,9 @@ let setupButtonEvents = function (template) {
     let min = itemTemplate.find('.prompt-min').val()
     let max = itemTemplate.find('.prompt-max').val()
     let modify = itemTemplate.find('.prompt-modify').val()
+    let type = itemTemplate.find('.prompt-type').val()
+    let input = itemTemplate.find('.prompt-input').val()
+    
     if (!min) {
       min = 3
     }
@@ -66,16 +69,18 @@ let setupButtonEvents = function (template) {
     }
 
     return {
-      min, max, modify
+      min, max, modify, type, input
     }
   }
 
   let _this = this
   let buildPrompt = function (itemTemplate, type, lang = 'en') {
-    let {min, max, modify} = extractPromptMaxMin(itemTemplate)
+    let {min, max, modify, input} = extractPromptMaxMin(itemTemplate)
     _this.promptMin = min
     _this.promptMax = max
     _this.promptModify = modify
+    _this.promptType = type
+    _this.promptInput = input
     // console.log(min, max, modify)
 
     let promptLeader = ``
@@ -143,39 +148,74 @@ let setupButtonEvents = function (template) {
         promptLeader = `請將下面文字整理成心智圖，用tab縮排${modifyPrompt}：`
       }
     }
+    else if (type === 'quiz') {
+      // let unit = 'options'
+      if (min < 3) {
+        min = 3
+      }
+      
+      promptLeader = `Please build a quiz with ${min} options from the following text, and only one of the options is correct: `
+      if (lang !== 'en') {
+        promptLeader = `請將下列文字改寫為選擇題，選項要有${min}個，其中只有一項是正確的：`
+      }
+    }
+    else if (type === 'answer') {
+      // let unit = 'options'
+      if (min < 3) {
+        min = 3
+      }
+      
+      promptLeader = `Please create an answer question from the following text, and give an answer between 200 to 300 words: `
+      if (lang !== 'en') {
+        promptLeader = `請將下列文字改寫為申論題，並且提供大約500字左右的答案。答案必須包含前言、本文及結論：`
+      }
+    }
 
     return promptLeader
   }
+  
+  this.addClickEvent(template, '.copy-prompt', (itemTemplate, originalText, transText, fromLang, toLang) => {
 
-  this.addClickEvent(template, '.copy-prompt-sentences-original', (itemTemplate, originalText, transText, fromLang, toLang) => {
-    let promptLeader = buildPrompt(itemTemplate, 'sentences', fromLang)
-    this.copyPlainString(promptLeader + '\n\n' + originalText)
-  })
+    let {min, max, modify, type, input} = extractPromptMaxMin(itemTemplate)
 
-  this.addClickEvent(template, '.copy-prompt-keywords-original', (itemTemplate, originalText, transText, fromLang, toLang) => {
-    let promptLeader = buildPrompt(itemTemplate, 'keywords', fromLang)
-    this.copyPlainString(promptLeader + '\n\n' + originalText)
+    let lang = fromLang
+    let text = originalText
+    if (input === 'trans') {
+      lang = toLang
+      text = transText
+    }
+    let promptLeader = buildPrompt(itemTemplate, type, lang)
+    this.copyPlainString(promptLeader + '\n\n' + text)
   })
+  // this.addClickEvent(template, '.copy-prompt-sentences-original', (itemTemplate, originalText, transText, fromLang, toLang) => {
+  //   let promptLeader = buildPrompt(itemTemplate, 'sentences', fromLang)
+  //   this.copyPlainString(promptLeader + '\n\n' + originalText)
+  // })
 
-  this.addClickEvent(template, '.copy-prompt-mindmap-original', (itemTemplate, originalText, transText, fromLang, toLang) => {
-    let promptLeader = buildPrompt(itemTemplate, 'mindmap', fromLang)
-    this.copyPlainString(promptLeader + '\n\n' + originalText)
-  })
+  // this.addClickEvent(template, '.copy-prompt-keywords-original', (itemTemplate, originalText, transText, fromLang, toLang) => {
+  //   let promptLeader = buildPrompt(itemTemplate, 'keywords', fromLang)
+  //   this.copyPlainString(promptLeader + '\n\n' + originalText)
+  // })
 
-  this.addClickEvent(template, '.copy-prompt-sentences-trans', (itemTemplate, originalText, transText, fromLang, toLang) => {
-    let promptLeader = buildPrompt(itemTemplate, 'sentences', toLang)
-    this.copyPlainString(promptLeader + '\n\n' + transText)
-  })
+  // this.addClickEvent(template, '.copy-prompt-mindmap-original', (itemTemplate, originalText, transText, fromLang, toLang) => {
+  //   let promptLeader = buildPrompt(itemTemplate, 'mindmap', fromLang)
+  //   this.copyPlainString(promptLeader + '\n\n' + originalText)
+  // })
 
-  this.addClickEvent(template, '.copy-prompt-keywords-trans', (itemTemplate, originalText, transText, fromLang, toLang) => {
-    let promptLeader = buildPrompt(itemTemplate, 'keywords', toLang)
-    this.copyPlainString(promptLeader + '\n\n' + transText)
-  })
+  // this.addClickEvent(template, '.copy-prompt-sentences-trans', (itemTemplate, originalText, transText, fromLang, toLang) => {
+  //   let promptLeader = buildPrompt(itemTemplate, 'sentences', toLang)
+  //   this.copyPlainString(promptLeader + '\n\n' + transText)
+  // })
 
-  this.addClickEvent(template, '.copy-prompt-mindmap-trans', (itemTemplate, originalText, transText, fromLang, toLang) => {
-    let promptLeader = buildPrompt(itemTemplate, 'mindmap', toLang)
-    this.copyPlainString(promptLeader + '\n\n' + transText)
-  })
+  // this.addClickEvent(template, '.copy-prompt-keywords-trans', (itemTemplate, originalText, transText, fromLang, toLang) => {
+  //   let promptLeader = buildPrompt(itemTemplate, 'keywords', toLang)
+  //   this.copyPlainString(promptLeader + '\n\n' + transText)
+  // })
+
+  // this.addClickEvent(template, '.copy-prompt-mindmap-trans', (itemTemplate, originalText, transText, fromLang, toLang) => {
+  //   let promptLeader = buildPrompt(itemTemplate, 'mindmap', toLang)
+  //   this.copyPlainString(promptLeader + '\n\n' + transText)
+  // })
 
   setTimeout(() => {
     this.resizeTextarea(template.find('.original-text')[0])

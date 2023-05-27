@@ -46,13 +46,26 @@ let addOutputItem = function (item) {
               <option value="longer">longer</option>
             </select>
           </div>
-          <div class="six wide field">
-            <div class="ui fluid mini buttons">
-              <button type="button" class="copy-prompt-sentences-original ui button">句子</button>
-              <button type="button" class="copy-prompt-keywords-original ui button">關鍵字</button>
-              <button type="button" class="copy-prompt-mindmap-original ui button">心智圖</button>
-              <a href="https://chat.openai.com/" target="chatgpt" class="ui button">ChatGPT</a>
-            </div>
+          <div class="tiny inline three wide field">
+            <label>
+              類型
+            </label>
+            <select class="prompt-type">
+              <option value="sentences">句子</option>
+              <option value="keywords">關鍵字</option>
+              <option value="mindmap">心智圖</option>
+              <option value="quiz">選擇題</option>
+              <option value="answer">申論題</option>
+            </select>
+          </div>
+          <div class="tiny inline three wide field">
+            <label>
+              目標
+            </label>
+            <select class="prompt-input">
+              <option value="original">原句</option>
+              <option value="trans">翻譯</option>
+            </select>
           </div>
         </div>
         <div class="field">
@@ -71,9 +84,7 @@ let addOutputItem = function (item) {
         <div class="fields">
           <div class=" eight wide field">
             <div class="ui fluid mini buttons">
-              <button type="button" class="copy-prompt-sentences-trans ui button">句子</button>
-              <button type="button" class="copy-prompt-keywords-trans ui button">關鍵字</button>
-              <button type="button" class="copy-prompt-mindmap-trans ui button">心智圖</button>
+              <button type="button" class="copy-prompt ui button">複製提示詞</button>
               <a href="https://chat.openai.com/" target="chatgpt" class="ui button">ChatGPT</a>
             </div>
           </div>
@@ -95,6 +106,8 @@ let addOutputItem = function (item) {
 
   template.find('.original-text').val(item.text)
   template.find('.prompt-modify').val(this.promptModify)
+  template.find('.prompt-type').val(this.promptType)
+  template.find('.prompt-input').val(this.promptInput)
 
   let select = template.find('.trans-to-lang')
   this.langs.forEach((lang) => {

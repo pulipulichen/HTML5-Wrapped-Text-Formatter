@@ -10,6 +10,8 @@ let appOutput = {
       promptMin: 3,
       promptMax: 5,
       promptModify: 'normal',
+      promptType: 'sentences',
+      promptInput: 'original',
     }
   },
   mounted () {
