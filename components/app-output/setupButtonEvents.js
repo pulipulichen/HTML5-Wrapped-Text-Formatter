@@ -113,13 +113,13 @@ let setupButtonEvents = function (template) {
       if (min === max) {
         promptLeader = `${min} ${unit} in a list${modifyPrompt}: `
         if (lang !== 'en') {
-          promptLeader = `整理成${min}個句子，組成清單${modifyPrompt}：`
+          promptLeader = `請將下面文字整理成${min}個句子，組成清單${modifyPrompt}：`
         } 
       }
       else {
         promptLeader = `${min} to ${max} ${unit} in a list${modifyPrompt}: `
         if (lang !== 'en') {
-          promptLeader = `整理成${min}到${max}個句子，組成清單${modifyPrompt}：`
+          promptLeader = `請將下面文字整理成${min}到${max}個句子，組成清單${modifyPrompt}：`
         } 
       }
     }
@@ -131,13 +131,31 @@ let setupButtonEvents = function (template) {
       if (min === max) {
         promptLeader = `${min} ${unit}${modifyPrompt}: `
         if (lang !== 'en') {
-          promptLeader = `整理成${min}個關鍵字${modifyPrompt}：`
+          promptLeader = `請將下面文字整理成${min}個關鍵字${modifyPrompt}：`
         }
       }
       else {
         promptLeader = `${min} to ${max} ${unit}${modifyPrompt}: `
         if (lang !== 'en') {
-          promptLeader = `整理成${min}到${max}個關鍵字${modifyPrompt}：`
+          promptLeader = `請將下面文字整理成${min}到${max}個關鍵字${modifyPrompt}：`
+        }
+      }
+    }
+    else if (type === 'paragraphs') {
+      let unit = 'paragraphs'
+      if (min === 1 && max === 1) {
+        unit = 'paragraph'
+      }
+      if (min === max) {
+        promptLeader = `Please format following text as ${min} ${unit}${modifyPrompt}: `
+        if (lang !== 'en') {
+          promptLeader = `請將下面文字整理成${min}個段落${modifyPrompt}：`
+        }
+      }
+      else {
+        promptLeader = `Please format following text as ${min} to ${max} ${unit}${modifyPrompt}: `
+        if (lang !== 'en') {
+          promptLeader = `請將下面文字整理成${min}到${max}個段落${modifyPrompt}：`
         }
       }
     }
@@ -145,7 +163,7 @@ let setupButtonEvents = function (template) {
       
       promptLeader = `Please convert the following text into a mind map${modifyPrompt}: `
       if (lang !== 'en') {
-        promptLeader = `請將下面文字整理成心智圖，用tab縮排${modifyPrompt}：`
+        promptLeader = `請將下面文字整理成心智圖，使用純文字，用tab縮排${modifyPrompt}：`
       }
     }
     else if (type === 'quiz') {

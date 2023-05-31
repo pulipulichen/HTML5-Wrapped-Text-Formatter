@@ -54,6 +54,7 @@ let addOutputItem = function (item) {
               <option value="sentences">句子</option>
               <option value="keywords">關鍵字</option>
               <option value="mindmap">心智圖</option>
+              <option value="paragraphs">段落</option>
               <option value="quiz">選擇題</option>
               <option value="answer">申論題</option>
             </select>
@@ -85,8 +86,8 @@ let addOutputItem = function (item) {
           <div class=" eight wide field">
             <div class="ui fluid mini buttons">
               <button type="button" class="copy-prompt ui button">複製提示詞</button>
-              <a href="https://chat.openai.com/" target="chatgpt" class="ui button">ChatGPT</a>
-              <a href="https://pulipulichen.github.io/HTML-Summernote-Editor/index.html" target="html_editor" class="ui button">HTML Editor</a>
+              <a href="https://chat.openai.com/" target="chatgpt" class="ui button" onclick="PopupUtils.openURLFullscreen(event)">ChatGPT</a>
+              <a href="https://pulipulichen.github.io/HTML-Summernote-Editor/index.html" target="html_editor" class="ui button" onclick="PopupUtils.openURLFullscreen(event)">HTML Editor</a>
             </div>
           </div>
           <div class="ui mini icon fluid input eight wide field">
