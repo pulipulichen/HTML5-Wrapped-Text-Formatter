@@ -86,6 +86,7 @@ let addOutputItem = function (item) {
             <div class="ui fluid mini buttons">
               <button type="button" class="copy-prompt ui button">複製提示詞</button>
               <a href="https://chat.openai.com/" target="chatgpt" class="ui button">ChatGPT</a>
+              <a href="https://pulipulichen.github.io/HTML-Summernote-Editor/index.html" target="html_editor" class="ui button">HTML Editor</a>
             </div>
           </div>
           <div class="ui mini icon fluid input eight wide field">
