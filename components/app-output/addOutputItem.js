@@ -23,7 +23,7 @@ let addOutputItem = function (item) {
             <button type="button" class="copy-original-text ui button">複製原文</button>
           </div>
         </div>
-        <div class="inline fields">
+        <div class="inline fields prompt-controller">
           <div class=" inline tiny three wide field">
             <label>
               Min
@@ -36,7 +36,7 @@ let addOutputItem = function (item) {
             </label>
             <input type="number" class="prompt-max prompt-limit" min="1" value="${this.promptMax}" />
           </div>
-          <div class="tiny inline four wide field">
+          <div class="tiny inline five wide field">
             <label>
               改寫
             </label>
@@ -46,7 +46,7 @@ let addOutputItem = function (item) {
               <option value="longer">longer</option>
             </select>
           </div>
-          <div class="tiny inline three wide field">
+          <div class="tiny inline five wide field">
             <label>
               類型
             </label>
@@ -57,15 +57,6 @@ let addOutputItem = function (item) {
               <option value="paragraphs">段落</option>
               <option value="quiz">選擇題</option>
               <option value="answer">申論題</option>
-            </select>
-          </div>
-          <div class="tiny inline three wide field">
-            <label>
-              目標
-            </label>
-            <select class="prompt-input">
-              <option value="original">原句</option>
-              <option value="trans">翻譯</option>
             </select>
           </div>
         </div>
@@ -82,7 +73,17 @@ let addOutputItem = function (item) {
             <button type="button" class="remove-item ui button">移除</button>
           </div>
         </div>
-        <div class="fields">
+        <div class="fields prompt-controller">
+
+          <div class="tiny inline three wide field">
+            <label>
+              目標
+            </label>
+            <select class="prompt-input">
+              <option value="original">原句</option>
+              <option value="trans">翻譯</option>
+            </select>
+          </div>
           <div class=" eight wide field">
             <div class="ui fluid mini buttons">
               <button type="button" class="copy-prompt ui button">複製提示詞</button>
@@ -90,7 +91,7 @@ let addOutputItem = function (item) {
               <a href="https://pulipulichen.github.io/HTML-Summernote-Editor/index.html" target="html_editor" class="ui button" onclick="PopupUtils.openURLFullscreen(event)">HTML Editor</a>
             </div>
           </div>
-          <div class="ui mini icon fluid input eight wide field">
+          <div class="ui mini icon fluid input five wide field">
             <input type="hidden" class="trans-from-lang" />
             <select class="trans-to-lang">
             </select>
