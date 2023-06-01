@@ -161,7 +161,7 @@ let setupButtonEvents = function (template) {
     }
     else if (type === 'mindmap') {
       
-      promptLeader = `Please convert the following text into a mind map${modifyPrompt}: `
+      promptLeader = `Please convert the following text into a mind map${modifyPrompt}, plain text, tab indented: `
       if (lang !== 'en') {
         promptLeader = `請將下面文字整理成心智圖，使用純文字，用tab縮排${modifyPrompt}：`
       }
