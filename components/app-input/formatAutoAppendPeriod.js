@@ -18,7 +18,7 @@ let formatAutoAppendPeriod = function (text) {
     let lastChar = line.slice(-1)
     // console.log(lastChar)
     
-    if (".。'\":;：；…」?？!！]".indexOf(lastChar) === -1) {
+    if (".。'\":;：–；…」?？!！]".indexOf(lastChar) === -1) {
       if ('，'.indexOf(lastChar) !== -1) {
         line = line.slice(0, -1)
       }
