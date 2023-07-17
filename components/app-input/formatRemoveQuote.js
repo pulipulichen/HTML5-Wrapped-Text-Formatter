@@ -19,6 +19,7 @@ let formatRemoveQuote = function (text) {
     splitor = ['（', '）']
   }
  
+  // console.log(text.split(splitor[0]))
   text.split(splitor[0]).forEach((t, i) => {
     // console.log(t, i)
     if (i === 0) {
@@ -28,7 +29,7 @@ let formatRemoveQuote = function (text) {
 
     let pos = t.lastIndexOf(splitor[1])
     if (pos === -1) {
-      output.push(splitor[0] + t)
+      // output.push(splitor[0] + t)
       return true
     }
 
