@@ -8,8 +8,8 @@ let appOutput = {
       transIframe: document.getElementById('transTempIframe'),
       transTextarea: document.getElementById('waitForTrans'),
       promptMin: 3,
-      promptMax: 5,
-      promptModify: 'normal',
+      promptMax: 4,
+      promptModify: 'more shorter',
       promptType: 'sentences',
       promptInput: 'original',
     }
