@@ -24,4 +24,10 @@ LOCAL_CONFIG = {
   convertPunctuationMarks: true,
   transFromLang: 'auto',
   transToLang: 'auto',
+
+  promptMin: 3,
+  promptMax: 4,
+  promptModify: 'more shorter',
+  promptType: 'sentences',
+  promptInput: 'original',
 }

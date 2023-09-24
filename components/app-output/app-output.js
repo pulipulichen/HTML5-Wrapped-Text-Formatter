@@ -15,6 +15,17 @@ let appOutput = {
     }
   },
   mounted () {
+
+    let restoreAttrs = [
+      'promptMin',
+      'promptMax',
+      'promptModify',
+      'promptType',
+      'promptInput'
+    ].forEach((attr) => {
+      this[attr] = this.db.localConfig[attr]
+    })
+
   },
   computed: {
     langs () {
@@ -23,6 +34,21 @@ let appOutput = {
     }
   },
   watch: {
+    promptMin (value) {
+      this.db.localConfig.promptMin = value
+    },
+    promptMax (value) {
+      this.db.localConfig.promptMax = value
+    },
+    promptModify (value) {
+      this.db.localConfig.promptModify = value
+    },
+    promptType (value) {
+      this.db.localConfig.promptType = value
+    },
+    promptInput (value) {
+      this.db.localConfig.promptInput = value
+    },
   },
   methods: {
     addOutputItem,
