@@ -1,9 +1,9 @@
 let formatAddPaddingLine = function (text) {
   text = text.trim()
   if (!this.db.localConfig.addPaddingLine) {
-    while (text.indexOf('\n\n') > -1) {
-      text = text.replace(/\n\n/g, '\n')
-    }
+    // while (text.indexOf('\n\n') > -1) {
+    //   text = text.replace(/\n\n/g, '\n')
+    // }
     return text
   }
 

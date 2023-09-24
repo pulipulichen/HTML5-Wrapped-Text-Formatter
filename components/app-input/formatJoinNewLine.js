@@ -1,4 +1,5 @@
 let formatJoinNewLine = function (text) {
+  // console.log(this.db.localConfig.joinNewLine)
   if (!this.db.localConfig.joinNewLine) {
     return text
   }

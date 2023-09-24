@@ -122,10 +122,16 @@ let formatBreakSentence = function (text) {
   // console.log(_source)
 
   _source = _source.trim()
+  
   while (_source.indexOf('\n\n\n') > -1) {
     _source = _source.split('\n\n\n').join('\n\n')
     _source = _source.trim()
   }
+
+  // while (_source.indexOf('\n\n\n\n') > -1) {
+  //   _source = _source.split('\n\n\n\n').join('\n\n\n')
+  //   _source = _source.trim()
+  // }
   
   return _source
 }

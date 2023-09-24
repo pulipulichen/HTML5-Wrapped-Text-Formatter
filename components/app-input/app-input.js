@@ -30,7 +30,7 @@ let appInput = {
         this.db.localConfig.input = this.db.localConfig.lastInputText
       }
 
-      // this.test20230601()
+      this.test20230601()
     }, 500)
   },
   computed: {
