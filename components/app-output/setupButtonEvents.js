@@ -93,7 +93,7 @@ let setupButtonEvents = function (template) {
       }
     }
     else if (modify === 'more shorter') {
-      modifyPrompt = ', more shorter'
+      modifyPrompt = ', more shorter and simpler'
       if (lang !== 'en') {
         modifyPrompt = '，非常短'
       }
