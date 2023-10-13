@@ -118,6 +118,9 @@ let setupButtonEvents = function (template) {
 
       if (min === max) {
         promptLeader = `${min} ${unit} in a list${modifyPrompt}: `
+        if (min === 1) {
+          promptLeader = 'only ' + promptLeader
+        }
         if (lang !== 'en') {
           promptLeader = `請使用正體中文，將下面文字整理成${min}個句子，組成清單${modifyPrompt}：`
         } 
