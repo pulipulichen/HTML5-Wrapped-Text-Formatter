@@ -24,7 +24,21 @@ let addOutputItem = function (item) {
           </div>
         </div>
         <div class="inline fields prompt-controller">
-          <div class=" inline tiny three wide field">
+
+          <div class="tiny inline five wide field">
+            <label>
+              類型
+            </label>
+            <select class="prompt-type">
+              <option value="sentences">句子</option>
+              <option value="keywords">關鍵字</option>
+              <option value="mindmap">心智圖</option>
+              <option value="paragraphs">段落</option>
+              <option value="quiz">選擇題</option>
+              <option value="answer">申論題</option>
+            </select>
+          </div>
+          <div class="inline tiny three wide field">
             <label>
               Min
             </label>
@@ -45,19 +59,6 @@ let addOutputItem = function (item) {
               <option value="shorter">shorter</option>
               <option value="normal">normal</option>
               <option value="longer">longer</option>
-            </select>
-          </div>
-          <div class="tiny inline five wide field">
-            <label>
-              類型
-            </label>
-            <select class="prompt-type">
-              <option value="sentences">句子</option>
-              <option value="keywords">關鍵字</option>
-              <option value="mindmap">心智圖</option>
-              <option value="paragraphs">段落</option>
-              <option value="quiz">選擇題</option>
-              <option value="answer">申論題</option>
             </select>
           </div>
         </div>
@@ -89,6 +90,7 @@ let addOutputItem = function (item) {
             <div class="ui fluid mini buttons">
               <button type="button" class="copy-prompt ui button">複製提示詞</button>
               <a href="https://chat.openai.com/" target="chatgpt" class="ui button" onclick="PopupUtils.openURLFullscreen(event)">ChatGPT</a>
+              <a href="https://bard.google.com/chat" target="bard" class="ui button" onclick="PopupUtils.openURLFullscreen(event)">Bard</a>
               <a href="https://pulipulichen.github.io/HTML-Summernote-Editor/index.html" target="html_editor" class="ui button" onclick="PopupUtils.openURLFullscreen(event)">HTML Editor</a>
             </div>
           </div>
