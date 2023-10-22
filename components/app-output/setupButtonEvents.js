@@ -89,19 +89,19 @@ let setupButtonEvents = function (template) {
     if (modify === 'shorter') {
       modifyPrompt = ', shorter'
       if (lang !== 'en') {
-        modifyPrompt = '，更短一些'
+        modifyPrompt = '，改寫得更短一些'
       }
     }
-    else if (modify === 'more shorter') {
-      modifyPrompt = ', more shorter and simpler'
+    else if (modify === 'very_short') {
+      modifyPrompt = ', very short and simple'
       if (lang !== 'en') {
-        modifyPrompt = '，非常短'
+        modifyPrompt = '，改寫得非常短且簡單'
       }
     }
     else if (modify === 'longer') {
       modifyPrompt = ', longer'
       if (lang !== 'en') {
-        modifyPrompt = '，更長一些'
+        modifyPrompt = '，改寫得更長一些'
       }
     }
 
@@ -122,13 +122,13 @@ let setupButtonEvents = function (template) {
           promptLeader = 'only ' + promptLeader
         }
         if (lang !== 'en') {
-          promptLeader = `請使用正體中文，將下面文字整理成${min}個句子，組成清單${modifyPrompt}：`
+          promptLeader = `請使用正體中文(繁體中文)，將下面文字整理成${min}個句子，組成列點式清單${modifyPrompt}：`
         } 
       }
       else {
         promptLeader = `${min} to ${max} ${unit} in a list${modifyPrompt}: `
         if (lang !== 'en') {
-          promptLeader = `請使用正體中文，將下面文字整理成${min}到${max}個句子，組成清單${modifyPrompt}：`
+          promptLeader = `請使用正體中文(繁體中文)，將下面文字整理成${min}到${max}個句子，組成列點式清單${modifyPrompt}：`
         } 
       }
     }

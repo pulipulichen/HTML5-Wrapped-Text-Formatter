@@ -55,7 +55,7 @@ let addOutputItem = function (item) {
               改寫
             </label>
             <select class="prompt-modify">
-              <option value="more shorter">more shorter</option>
+              <option value="very_short">very short</option>
               <option value="shorter">shorter</option>
               <option value="normal">normal</option>
               <option value="longer">longer</option>

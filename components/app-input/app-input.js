@@ -107,7 +107,9 @@ let appInput = {
       // return text.replace(/([\u4e00-\u9fa5\uFF01-\uFF5E\u3000-\u3003\u3008-\u300F\u3010-\u3011\u3014-\u3015\u301C-\u301E][\s]+[\u4e00-\u9fa5\uFF01-\uFF5E\u3000-\u3003\u3008-\u300F\u3010-\u3011\u3014-\u3015\u301C-\u301E])/g, (match) => {
       //   return match[0] + match[2]
       // })
-      return this.replaceInChinese(text, '[\\s]+')
+      
+      // return this.replaceInChinese(text, '[\\s]+')
+      return this.replaceInChinese(text, '[ ]+')
     },
     replaceInChinese,
     processTextNotBrackets,
