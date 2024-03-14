@@ -90,7 +90,7 @@ let addOutputItem = function (item) {
             <div class="ui fluid mini buttons">
               <button type="button" class="copy-prompt ui button">複製提示詞</button>
               <a href="https://chat.openai.com/" target="chatgpt" class="ui button" onclick="PopupUtils.openURLFullscreen(event)">ChatGPT</a>
-              <a href="https://bard.google.com/chat" target="bard" class="ui button" onclick="PopupUtils.openURLFullscreen(event)">Bard</a>
+              <a href="https://gemini.google.com/chat" target="gemini" class="ui button" onclick="PopupUtils.openURLFullscreen(event)">Gemini</a>
               <a href="https://pulipulichen.github.io/HTML-Summernote-Editor/index.html" target="html_editor" class="ui button" onclick="PopupUtils.openURLFullscreen(event)">HTML Editor</a>
             </div>
           </div>
