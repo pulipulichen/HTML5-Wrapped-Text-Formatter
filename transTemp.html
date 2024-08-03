@@ -31,13 +31,25 @@ function googleTranslateElementInit() {
 
   //setGoogleTransCookie()
   // return false
-  new google.translate.TranslateElement({
-    // pageLanguage: 'zh-TW',
-    // includedLanguages: 'zh-TW,zh-CN,en,ja,th,vi,ko,id,en',
-    autodisplay: false,
-    //autodisplay: true,
-    layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT
-  }, 'google_translate_element');
+  if (globalTarget === 'en') {
+    new google.translate.TranslateElement({
+      pageLanguage: 'zh-TW',
+      // includedLanguages: 'zh-TW,zh-CN,en,ja,th,vi,ko,id,en',
+      autodisplay: false,
+      //autodisplay: true,
+      layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT
+    }, 'google_translate_element');
+  }
+  else {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      // includedLanguages: 'zh-TW,zh-CN,en,ja,th,vi,ko,id,en',
+      autodisplay: false,
+      //autodisplay: true,
+      layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT
+    }, 'google_translate_element');
+  }
+    
 
   // return false
   // console.log('go')
