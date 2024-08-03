@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-<body>
-  <pre  id="source"></pre>
+<body style="background-color: yellow;">
+  <pre id="source"></pre>
   <textarea id="originalSource" style="display: none"></textarea>
   <div id="google_translate_element"></div>
   <script type="text/javascript">
@@ -21,32 +21,43 @@ function googleTranslateElementInit() {
     setTimeout(() => {
       googleTranslateElementInit()
     }, 1000)
-    return
+    console.log('wait for isOK')
+    return false
   }
 
   //setGoogleTransCookie()
-
+  // return false
   new google.translate.TranslateElement({
-    //pageLanguage: 'zh_TW',
+    pageLanguage: 'zh-TW',
+    includedLanguages: 'zh-TW,zh-CN,en,ja,th,vi,ko,id',
     autodisplay: false,
     //autodisplay: true,
     layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT
   }, 'google_translate_element');
+
+  // return false
   document.getElementById("source").addEventListener("DOMSubtreeModified", callbackToOpener, false);
 }
 function callbackToOpener() {
+  // console.log('callbackToOpener')
+
   setTimeout(function () {
     let output = $('#source').text()
     // let originalSource = $('#originalSource').val()
 
     if ($('.goog-te-combo').length === 0) {
-      callbackToOpener()
+      setTimeout(() => {
+        callbackToOpener()
+      }, 1000)
+      
       return
     }
     
     let originalSource = $('#originalSource').val()
     if (output === originalSource) {
-      callbackToOpener()
+      setTimeout(() => {
+        callbackToOpener()
+      }, 1000)
       return
     }
 
