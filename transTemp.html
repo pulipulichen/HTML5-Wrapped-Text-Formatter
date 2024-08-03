@@ -6,6 +6,7 @@
   <div id="google_translate_element"></div>
   <script type="text/javascript">
 let isOK = false
+let globalTarget
 function ok() {
   isOK = true
 }
@@ -13,6 +14,7 @@ function ok() {
 function setGoogleTransCookie(target) {
   //if (document.cookie === '') {
   document.cookie = 'googtrans=/auto/' + target;
+  globalTarget = target
   //}
 }
 
@@ -25,18 +27,25 @@ function googleTranslateElementInit() {
     return false
   }
 
+  document.getElementById("source").addEventListener("DOMSubtreeModified", callbackToOpener, false);
+
   //setGoogleTransCookie()
   // return false
   new google.translate.TranslateElement({
-    pageLanguage: 'zh-TW',
-    includedLanguages: 'zh-TW,zh-CN,en,ja,th,vi,ko,id',
+    // pageLanguage: 'zh-TW',
+    // includedLanguages: 'zh-TW,zh-CN,en,ja,th,vi,ko,id,en',
     autodisplay: false,
     //autodisplay: true,
     layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT
   }, 'google_translate_element');
 
   // return false
-  document.getElementById("source").addEventListener("DOMSubtreeModified", callbackToOpener, false);
+  // console.log('go')
+  // setTimeout(() => {
+
+  //   console.log(`goog-te-combo`, $('.goog-te-combo').length, $('.goog-te-combo').val(), globalTarget)
+  // }, 1000)
+  
 }
 function callbackToOpener() {
   // console.log('callbackToOpener')
@@ -45,6 +54,7 @@ function callbackToOpener() {
     let output = $('#source').text()
     // let originalSource = $('#originalSource').val()
 
+    console.log(`goog-te-combo`, $('.goog-te-combo').length)
     if ($('.goog-te-combo').length === 0) {
       setTimeout(() => {
         callbackToOpener()
@@ -54,6 +64,7 @@ function callbackToOpener() {
     }
     
     let originalSource = $('#originalSource').val()
+    console.log(originalSource)
     if (output === originalSource) {
       setTimeout(() => {
         callbackToOpener()
